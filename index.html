@@ -44,7 +44,7 @@ a.site{color:var(--gold-title);text-decoration:none}a.site:hover{text-decoration
 .feature h2{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:24px;line-height:1.15;margin:4px 0 6px}
 .feature h2 a{color:inherit;text-decoration:none}
 .feature p{color:#bdb7aa;font-size:14px;margin:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.feature .actions{flex:0 0 auto;display:flex;gap:8px}
+.feature .actions{flex:0 0 auto;display:flex;gap:8px;margin-top:0}
 .feature .btn{flex:0 0 auto}
 .feature .btn.primary{background:#c9a24a;color:#14140f}
 .feature .btn.ghost{border-color:#3a3934;color:#f3eee3}
@@ -166,8 +166,6 @@ const FEATURED = BOOKS.find(b => b.featured);
 if(FEATURED){ const b = FEATURED; document.getElementById('feature').innerHTML = `
   <a class="art" href="${b.id}/"><img src="covers/${b.id}-logo.jpg?v=${V}" alt="${esc(b.title)}"></a>
   <div class="txt">
-    <span class="kicker">The complete course</span>
-    <h2><a href="${b.id}/">${esc(b.title)}</a></h2>
     <p>${esc(b.desc)}</p>
   </div>
   <div class="actions">
