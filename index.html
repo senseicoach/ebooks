@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ron Taylor — Free Ebooks</title>
+<meta name="description" content="Free ebooks by Ron Taylor for students and professionals building careers in Canada. Download any book as an EPUB.">
+<meta property="og:title" content="Ron Taylor — Free Ebooks">
+<meta property="og:description" content="Free ebooks for students and professionals building careers in Canada.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f3ec; --paper:#fffdf8; --ink:#16202e; --muted:#5d6675; --line:#e3ddcf;
+  --navy:#14213a; --gold:#c9a24a; --gold-ink:#8a6a1f; --focus:#2b5bd7;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#0f1520; --paper:#161e2c; --ink:#ece7dc; --muted:#a3abb8; --line:#273145;
+         --navy:#0b111b; --gold:#d8b45e; --gold-ink:#e3c477; --focus:#7aa2ff; }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Inter,system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+
+header.hero{background:var(--navy);color:#f3eee3;padding:64px 0 56px;position:relative;overflow:hidden}
+header.hero::after{content:"";position:absolute;inset:auto -10% -60% 40%;height:120%;
+  background:radial-gradient(closest-side,rgba(201,162,74,.22),transparent);pointer-events:none}
+.eyebrow{letter-spacing:.22em;text-transform:uppercase;font-size:12px;color:var(--gold);font-weight:600}
+h1{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:clamp(36px,6vw,60px);line-height:1.05;margin:14px 0 14px;letter-spacing:-.01em}
+.lede{max-width:620px;color:#c9cfd9;font-size:18px;margin:0}
+.lede span{color:#f3eee3}
+
+.bar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:28px 0 8px}
+.filters{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:8px 16px;font:500 14px Inter,sans-serif;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.count{color:var(--muted);font-size:14px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:28px 24px;padding:16px 0 48px}
+.book{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px 14px 16px;display:flex;flex-direction:column;transition:box-shadow .2s, transform .2s;scroll-margin-top:24px}
+.book:hover{box-shadow:0 10px 30px -12px rgba(20,33,58,.35);transform:translateY(-2px)}
+.book.highlight{outline:3px solid var(--gold);outline-offset:3px}
+.cover{aspect-ratio:2/3;width:100%;border-radius:6px;overflow:hidden;background:#d9d3c4;box-shadow:0 1px 0 rgba(0,0,0,.05),0 8px 18px -10px rgba(0,0,0,.5)}
+.cover img{width:100%;height:100%;object-fit:cover;display:block}
+.lang{display:inline-block;margin-top:14px;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-ink)}
+.book h2{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:19px;line-height:1.2;margin:6px 0 6px}
+.book p{color:var(--muted);font-size:14px;margin:0 0 14px;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.actions{margin-top:auto;display:flex;gap:8px}
+.btn{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:6px;text-decoration:none;border-radius:9px;padding:10px 12px;font:600 14px Inter,sans-serif;cursor:pointer;border:1px solid transparent}
+.btn.primary{background:var(--navy);color:#f3eee3}
+@media (prefers-color-scheme: dark){ .btn.primary{background:var(--gold);color:#14213a} }
+.btn.ghost{flex:0 0 auto;background:transparent;border-color:var(--line);color:var(--ink)}
+.btn:focus-visible,.chip:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.size{font-weight:400;opacity:.75}
+
+section.help{border-top:1px solid var(--line);padding:40px 0 56px}
+section.help h3{font-family:Fraunces,Georgia,serif;font-size:26px;margin:0 0 18px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.step{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:18px}
+.step b{display:block;margin-bottom:6px}
+.step p{margin:0;color:var(--muted);font-size:14px}
+footer{color:var(--muted);font-size:13px;padding:0 0 40px}
+@media (max-width:540px){
+  header.hero{padding:44px 0 40px}
+  .grid{grid-template-columns:1fr 1fr;gap:16px 12px}
+  .book{padding:10px 10px 12px}
+  .book h2{font-size:16px}
+  .book p{display:none}
+  .actions{flex-direction:column;gap:6px}
+  .btn.ghost{flex:1}
+  .size{display:none}
+}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);opacity:0;background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;font-size:14px;transition:.2s;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">A Masterclass Series by Ron Taylor</div>
+    <h1>Free Ebooks</h1>
+    <p class="lede">Books for students and professionals building their careers in Canada. <span>Every book is free.</span> Tap <em>Download</em> to save it to your phone, tablet or computer.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="bar">
+    <div class="filters" role="group" aria-label="Filter by language">
+      <button class="chip" data-f="all" aria-pressed="true">All books</button>
+      <button class="chip" data-f="en" aria-pressed="false">English</button>
+      <button class="chip" data-f="pt" aria-pressed="false">Português</button>
+    </div>
+    <div class="count" id="count"></div>
+  </div>
+  <div class="grid" id="grid"></div>
+
+  <section class="help" id="how-to-open">
+    <h3>How to open your book</h3>
+    <div class="steps">
+      <div class="step"><b>iPhone or iPad</b><p>Tap <em>Download</em>, then tap <em>Open in Books</em>. If you don't see that, tap the Share button and choose <em>Books</em>.</p></div>
+      <div class="step"><b>Mac</b><p>Download the file, then double-click it in your Downloads folder. It opens in Apple Books.</p></div>
+      <div class="step"><b>Android or Windows</b><p>Install a free EPUB reader such as Google Play Books (Android) or Thorium Reader (Windows), then open the downloaded file with it.</p></div>
+      <div class="step"><b>Kindle</b><p>Go to amazon.com/sendtokindle, sign in and upload the .epub file. It appears on your Kindle in a few minutes.</p></div>
+    </div>
+  </section>
+  <footer>© Ron Taylor · executiveclass.ca</footer>
+</main>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+// To add a book: put the .epub in /books and the cover in /covers (same name), then add a line here.
+const BOOKS = [
+  {id:"52-hours-to-a-winning-interview", title:"52 Hours to a Winning Interview", lang:"en", kb:269,
+   desc:"Fifty-two cases, strong answers taken apart, and the words, sounds and documents that decide an interview. For Brazilians building careers in Canada."},
+  {id:"why-you-the-art-of-the-interview", title:"Why You? The Art of the Interview", lang:"en", kb:457,
+   desc:"Every interview question is the same question in a different costume. Know your value, prove it, communicate it."},
+  {id:"blue-ocean", title:"Blue Ocean: 52 Case Studies in Uncontested Market Strategy", lang:"en", kb:1136,
+   desc:"From Cirque du Soleil and Southwest Airlines to Nubank and Havaianas, each case unpacked with the Eliminate-Reduce-Raise-Create grid, vocabulary, practice tasks and an answer key."},
+  {id:"first-principles", title:"First Principles", lang:"en", kb:876,
+   desc:"52 stories about thinking differently: a reading and critical-thinking course for advanced ESL and Business English learners."},
+  {id:"wise-up", title:"Wise Up", lang:"en", kb:970,
+   desc:"Decisions that made history: fifty-two case studies in disaster, decision-making, organizational collapse and recovery."},
+  {id:"natures-business-model", title:"Nature's Business Model", lang:"en", kb:867,
+   desc:"52 principles from nature for building better organizations: short case studies tracing mechanisms in the natural world into working principles."},
+  {id:"the-intimacies-of-ritual", title:"The Intimacies of Ritual", lang:"en", kb:1024,
+   desc:"52 customs from around the world, arranged not by geography but by the human questions they answer."},
+  {id:"remarkable-canadians", title:"Remarkable Canadians: 52 Lives That Shaped a Nation", lang:"en", kb:212,
+   desc:"Fifty-two profiles of significant Canadians, with a citizenship practice quiz."},
+  {id:"the-canadian-networking-code", title:"The Canadian Networking Code", lang:"pt", kb:1057,
+   desc:"Como profissionais brasileiros transformam experiência em oportunidade no Canadá. Inclui 100 scripts práticos e um plano de 30/60/90 dias."},
+  {id:"the-brazucan-pathway", title:"The Brazucan Pathway", lang:"pt", kb:1160,
+   desc:"Um GPS psicológico para construir a sua vida no Canadá: do choque de status ao luto à distância, à reconstrução profissional e ao pertencimento."},
+  {id:"comece-com-tudo", title:"Comece com Tudo", lang:"pt", kb:449,
+   desc:"Guia bilíngue de preparação para a universidade no Canadá: explicações em português, modelos em inglês."},
+];
+
+const grid = document.getElementById('grid'), count = document.getElementById('count'), toast = document.getElementById('toast');
+const label = {en:"English", pt:"Português"};
+const fmt = kb => kb >= 1000 ? (kb/1024).toFixed(1)+" MB" : kb+" KB";
+const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+grid.innerHTML = BOOKS.map(b => `
+  <article class="book" id="${b.id}" data-lang="${b.lang}">
+    <div class="cover"><img src="covers/${b.id}.jpg" alt="Cover of ${esc(b.title)}" loading="lazy" width="560" height="840"></div>
+    <span class="lang">${label[b.lang]}</span>
+    <h2>${esc(b.title)}</h2>
+    <p>${esc(b.desc)}</p>
+    <div class="actions">
+      <a class="btn primary" href="books/${b.id}.epub" download>Download <span class="size">· ${fmt(b.kb)}</span></a>
+      <button class="btn ghost" data-share="${b.id}" title="Copy a link to this book" aria-label="Copy link to ${esc(b.title)}">Link</button>
+    </div>
+  </article>`).join('');
+
+function show(msg){ toast.textContent = msg; toast.classList.add('show'); clearTimeout(show.t); show.t = setTimeout(()=>toast.classList.remove('show'), 1800); }
+
+function applyFilter(f){
+  let n = 0;
+  document.querySelectorAll('.book').forEach(el => { const on = f === 'all' || el.dataset.lang === f; el.hidden = !on; if(on) n++; });
+  document.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', c.dataset.f === f));
+  count.textContent = n + (n === 1 ? " book" : " books");
+}
+document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => applyFilter(c.dataset.f)));
+applyFilter('all');
+
+grid.addEventListener('click', async e => {
+  const b = e.target.closest('[data-share]'); if(!b) return;
+  const url = location.origin + location.pathname + '#' + b.dataset.share;
+  try { await navigator.clipboard.writeText(url); show('Link copied'); }
+  catch { prompt('Copy this link:', url); }
+});
+
+function highlight(){
+  document.querySelectorAll('.book.highlight').forEach(el => el.classList.remove('highlight'));
+  const id = decodeURIComponent(location.hash.slice(1)); const el = id && document.getElementById(id);
+  if(el && el.classList.contains('book')){ applyFilter('all'); el.classList.add('highlight'); el.scrollIntoView({block:'center'}); }
+}
+window.addEventListener('hashchange', highlight); highlight();
+</script>
+</body>
+</html>
