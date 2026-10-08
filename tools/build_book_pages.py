@@ -49,6 +49,8 @@ TPL = """<!doctype html>
 <meta property="og:description" content="{desc}">
 <meta property="og:image" content="{site}/covers/{coverfile}">
 <meta property="og:url" content="{site}/{id}/">
+<link rel="icon" type="image/png" href="../favicon.png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -79,6 +81,7 @@ h2{{font-family:Fraunces,Georgia,serif;font-size:24px;margin:0 0 16px}}
 .step{{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px}}
 .step b{{display:block;margin-bottom:4px}}
 .step p{{margin:0;color:var(--muted);font-size:14px}}
+.seal{{text-align:center;padding:4px 0 26px}}.seal a{{display:inline-block;border-radius:50%;box-shadow:0 10px 24px -14px rgba(0,0,0,.6)}}.seal img{{display:block;width:110px;height:110px}}
 footer{{color:var(--muted);font-size:13px;padding:0 0 40px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}}
 footer a{{color:inherit}}
 
@@ -105,6 +108,7 @@ footer a{{color:inherit}}
     <h2>{helptitle}</h2>
     <div class="steps">{steps}</div>
   </section>
+  <div class="seal"><a href="https://executiveclass.ca" aria-label="Executive Class: executiveclass.ca"><img src="../covers/executiveclass-logo.png?v={v}" alt="Executive Class logo" width="110" height="110"></a></div>
   <footer><span>© Ron Taylor · <a href="https://executiveclass.ca">executiveclass.ca</a></span><a href="../">{more}</a></footer>
 </main>
 </body>

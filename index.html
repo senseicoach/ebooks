@@ -8,6 +8,8 @@
 <meta property="og:title" content="executiveclass.ca">
 <meta property="og:site_name" content="executiveclass.ca">
 <meta property="og:description" content="Course materials for professionals investing in their success.">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -74,6 +76,7 @@ section.help h3{font-family:Fraunces,Georgia,serif;font-size:26px;margin:0 0 18p
 .step b{display:block;margin-bottom:6px}
 .step p{margin:0;color:var(--muted);font-size:14px}
 footer{color:var(--muted);font-size:13px;padding:0 0 40px}
+.brandfoot{text-align:center;padding:8px 0 48px}.brandfoot .seal{display:inline-block;margin-bottom:14px;border-radius:50%;box-shadow:0 10px 26px -14px rgba(0,0,0,.6)}.brandfoot .seal img{display:block;width:140px;height:140px}
 @media (max-width:540px){
   header.hero{padding:28px 0 0}
   .grid{grid-template-columns:1fr 1fr;gap:16px 12px}
@@ -117,14 +120,17 @@ footer{color:var(--muted);font-size:13px;padding:0 0 40px}
       <div class="step"><b>Kindle</b><p>Go to amazon.com/sendtokindle, sign in and upload the .epub file. It appears on your Kindle in a few minutes.</p></div>
     </div>
   </section>
-  <footer>© Ron Taylor · <a href="https://executiveclass.ca">executiveclass.ca</a></footer>
+  <footer class="brandfoot">
+    <a href="https://executiveclass.ca" class="seal" aria-label="Executive Class: executiveclass.ca"><img src="covers/executiveclass-logo.png?v=1" alt="Executive Class logo" width="140" height="140"></a>
+    <div>© Ron Taylor · <a href="https://executiveclass.ca">executiveclass.ca</a></div>
+  </footer>
 </main>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
 // To add a book: put the .epub in /books and the cover in /covers (same name), then add a line here.
 // Changes whenever a cover changes, so browsers fetch the new image instead of an old saved copy.
-const V = "58e7d4eb";
+const V = "b148ffc6";
 const BOOKS = [
   {id:"the-canadian-networking-code", title:"The Canadian Networking Code", lang:"pt", kb:1057,
    desc:"Como profissionais brasileiros transformam experiência em oportunidade no Canadá. Inclui 100 scripts práticos e um plano de 30/60/90 dias."},
