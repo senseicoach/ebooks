@@ -44,8 +44,8 @@ a.site{text-decoration:none}a.site:hover{color:var(--gold)}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:28px 24px;padding:16px 0 48px}
 .book{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px 14px 16px;display:flex;flex-direction:column;transition:box-shadow .2s, transform .2s;scroll-margin-top:24px}
 .book:hover{box-shadow:0 10px 30px -12px rgba(20,33,58,.35);transform:translateY(-2px)}
-.book.highlight{outline:3px solid var(--gold);outline-offset:3px}
-.cover{aspect-ratio:2/3;width:100%;border-radius:6px;overflow:hidden;background:#d9d3c4;box-shadow:0 1px 0 rgba(0,0,0,.05),0 8px 18px -10px rgba(0,0,0,.5)}
+.book h2 a{text-decoration:none}.book h2 a:hover{text-decoration:underline}
+.cover{display:block;aspect-ratio:2/3;width:100%;border-radius:6px;overflow:hidden;background:#d9d3c4;box-shadow:0 1px 0 rgba(0,0,0,.05),0 8px 18px -10px rgba(0,0,0,.5)}
 .cover img{width:100%;height:100%;object-fit:cover;display:block}
 .lang{display:inline-block;margin-top:14px;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-ink)}
 .book h2{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:19px;line-height:1.2;margin:6px 0 6px}
@@ -146,9 +146,9 @@ const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','
 
 grid.innerHTML = BOOKS.map(b => `
   <article class="book" id="${b.id}" data-lang="${b.lang}">
-    <div class="cover"><img src="covers/${b.id}.jpg" alt="Cover of ${esc(b.title)}" loading="lazy" width="560" height="840"></div>
+    <a class="cover" href="${b.id}/"><img src="covers/${b.id}.jpg" alt="Cover of ${esc(b.title)}" loading="lazy" width="560" height="840"></a>
     <span class="lang">${label[b.lang]}</span>
-    <h2>${esc(b.title)}</h2>
+    <h2><a href="${b.id}/">${esc(b.title)}</a></h2>
     <p>${esc(b.desc)}</p>
     <div class="actions">
       <a class="btn primary" href="books/${b.id}.epub" download>Download <span class="size">· ${fmt(b.kb)}</span></a>
@@ -169,17 +169,17 @@ applyFilter('all');
 
 grid.addEventListener('click', async e => {
   const b = e.target.closest('[data-share]'); if(!b) return;
-  const url = location.origin + location.pathname + '#' + b.dataset.share;
+  const url = location.origin + location.pathname.replace(/index\.html$/,'') + b.dataset.share + '/';
   try { await navigator.clipboard.writeText(url); show('Link copied'); }
   catch { prompt('Copy this link:', url); }
 });
 
-function highlight(){
-  document.querySelectorAll('.book.highlight').forEach(el => el.classList.remove('highlight'));
-  const id = decodeURIComponent(location.hash.slice(1)); const el = id && document.getElementById(id);
-  if(el && el.classList.contains('book')){ applyFilter('all'); el.classList.add('highlight'); el.scrollIntoView({block:'center'}); }
+// Old-style links (…/ebooks/#wise-up) go straight to that book's own page.
+function toBookPage(){
+  const id = decodeURIComponent(location.hash.slice(1));
+  if(id && BOOKS.some(b => b.id === id)) location.replace(location.pathname.replace(/index\.html$/,'') + id + '/');
 }
-window.addEventListener('hashchange', highlight); highlight();
+window.addEventListener('hashchange', toBookPage); toBookPage();
 </script>
 </body>
 </html>
