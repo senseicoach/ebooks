@@ -127,6 +127,8 @@ footer{color:var(--muted);font-size:13px;padding:0 0 40px}
 
 <script>
 // To add a book: put the .epub in /books and the cover in /covers (same name), then add a line here.
+// Changes whenever a cover changes, so browsers fetch the new image instead of an old saved copy.
+const V = "d5c44343";
 const BOOKS = [
   {id:"the-canadian-networking-code", title:"The Canadian Networking Code", lang:"pt", kb:1057,
    desc:"Como profissionais brasileiros transformam experiência em oportunidade no Canadá. Inclui 100 scripts práticos e um plano de 30/60/90 dias."},
@@ -167,7 +169,7 @@ const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','
 
 const FEATURED = BOOKS.find(b => b.featured);
 if(FEATURED){ const b = FEATURED; document.getElementById('feature').innerHTML = `
-  <a class="art" href="${b.id}/"><img src="covers/${b.id}-wide.jpg" alt="${esc(b.title)}" width="1280" height="720"></a>
+  <a class="art" href="${b.id}/"><img src="covers/${b.id}-wide.jpg?v=${V}" alt="${esc(b.title)}" width="1280" height="720"></a>
   <div class="txt">
     <span class="kicker">The complete course</span>
     <h2><a href="${b.id}/">${esc(b.title)}</a></h2>
@@ -179,7 +181,7 @@ if(FEATURED){ const b = FEATURED; document.getElementById('feature').innerHTML =
   </div>`; }
 grid.innerHTML = BOOKS.filter(b => !b.featured).map(b => `
   <article class="book" id="${b.id}" data-lang="${b.lang}">
-    <a class="cover" href="${b.id}/"><img src="covers/${b.id}.jpg" alt="Cover of ${esc(b.title)}" loading="lazy" width="560" height="840"></a>
+    <a class="cover" href="${b.id}/"><img src="covers/${b.id}.jpg?v=${V}" alt="Cover of ${esc(b.title)}" loading="lazy" width="560" height="840"></a>
     <span class="lang">${label[b.lang]}</span>
     <h2><a href="${b.id}/">${esc(b.title)}</a></h2>
     <p>${esc(b.desc)}</p>

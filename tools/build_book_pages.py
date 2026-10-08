@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generate one page per book (e.g. wise-up/index.html) from the BOOKS list in index.html.
 Run from the repository root:  python3 tools/build_book_pages.py"""
-import re, html, os
+import re, html, os, hashlib
 
 SITE = "https://senseicoach.github.io/ebooks"
 src = open("index.html", encoding="utf-8").read()
@@ -12,6 +12,13 @@ for m in re.finditer(r"\{(.*?)\}", block, re.S):
     get = lambda k: re.search(rf'{k}:"((?:[^"\\]|\\.)*)"', body).group(1)
     books.append(dict(id=get("id"), title=get("title"), lang=get("lang"), desc=get("desc"),
                       kb=int(re.search(r"kb:(\d+)", body).group(1))))
+
+# Cache-busting version: a short hash of all cover images.
+h = hashlib.sha1()
+for f in sorted(os.listdir("covers")): h.update(open(os.path.join("covers", f), "rb").read())
+V = h.hexdigest()[:8]
+src = re.sub(r'const V = "[^"]*";', f'const V = "{V}";', src)
+open("index.html", "w", encoding="utf-8").write(src)
 
 LABEL = {"en": "English", "pt": "Português"}
 HELP = {
@@ -84,7 +91,7 @@ footer a{{color:inherit}}
 <header><div class="wrap"><a href="https://executiveclass.ca">executiveclass.ca</a><span>A Masterclass Series by Ron Taylor</span></div></header>
 <main class="wrap">
   <article class="book{wideclass}">
-    <div class="cover"><img src="../covers/{coverfile}" alt="Cover of {title}"></div>
+    <div class="cover"><img src="../covers/{coverfile}?v={v}" alt="Cover of {title}"></div>
     <div>
       <span class="lang">{langlabel}</span>
       <h1>{title}</h1>
@@ -109,7 +116,7 @@ for b in books:
     e = lambda s: html.escape(s, quote=True)
     size = f'{b["kb"]/1024:.1f} MB' if b["kb"] >= 1000 else f'{b["kb"]} KB'
     wide = os.path.exists(f"covers/{b['id']}-wide.jpg")
-    page = TPL.format(site=SITE, id=b["id"], wideclass=" wide" if wide else "",
+    page = TPL.format(v=V, site=SITE, id=b["id"], wideclass=" wide" if wide else "",
         coverfile=f"{b['id']}-wide.jpg" if wide else f"{b['id']}.jpg", title=e(b["title"]), desc=e(b["desc"]),
         htmllang="pt-BR" if b["lang"] == "pt" else "en", langlabel=LABEL[b["lang"]],
         dl=dl, size=size, helptitle=ht, more=more,
