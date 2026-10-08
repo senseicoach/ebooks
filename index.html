@@ -41,6 +41,18 @@ a.site{text-decoration:none}a.site:hover{color:var(--gold)}
 .chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .count{color:var(--muted);font-size:14px}
 
+.feature{margin:36px 0 8px;background:#000;color:#f3eee3;border-radius:16px;overflow:hidden;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);align-items:center;box-shadow:0 18px 40px -22px rgba(0,0,0,.6)}
+.feature .art{display:block;aspect-ratio:16/9;background:#000}
+.feature .art img{width:100%;height:100%;object-fit:cover;display:block}
+.feature .txt{padding:28px 36px 30px 8px}
+.feature .kicker{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#c9a24a}
+.feature h2{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:clamp(26px,3.2vw,38px);line-height:1.1;margin:8px 0 10px}
+.feature h2 a{color:inherit;text-decoration:none}
+.feature p{color:#c9c3b6;font-size:15px;margin:0 0 20px}
+.feature .btn.primary{background:#c9a24a;color:#14140f}
+.feature .btn.ghost{border-color:#3a3934;color:#f3eee3}
+.feature .actions{max-width:360px}
+@media (max-width:760px){.feature{grid-template-columns:1fr}.feature .txt{padding:4px 20px 22px}}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:28px 24px;padding:16px 0 48px}
 .book{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px 14px 16px;display:flex;flex-direction:column;transition:box-shadow .2s, transform .2s;scroll-margin-top:24px}
 .book:hover{box-shadow:0 10px 30px -12px rgba(20,33,58,.35);transform:translateY(-2px)}
@@ -89,6 +101,7 @@ footer{color:var(--muted);font-size:13px;padding:0 0 40px}
 </header>
 
 <main class="wrap">
+  <section class="feature" id="feature"></section>
   <div class="bar">
     <div class="filters" role="group" aria-label="Filter by language">
       <button class="chip" data-f="all" aria-pressed="true">All books</button>
@@ -129,7 +142,7 @@ const BOOKS = [
    desc:"From Cirque du Soleil and Southwest Airlines to Nubank and Havaianas, each case unpacked with the Eliminate-Reduce-Raise-Create grid, vocabulary, practice tasks and an answer key."},
   {id:"remarkable-canadians", title:"Remarkable Canadians: 52 Lives That Shaped a Nation", lang:"en", kb:340,
    desc:"Fifty-two profiles of significant Canadians, with a citizenship practice quiz."},
-  {id:"first-principles", title:"First Principles", lang:"en", kb:876,
+  {id:"first-principles", title:"First Principles", lang:"en", kb:988,
    desc:"52 stories about thinking differently: a reading and critical-thinking course for advanced ESL and Business English learners."},
   {id:"wise-up", title:"Wise Up", lang:"en", kb:970,
    desc:"Decisions that made history: fifty-two case studies in disaster, decision-making, organizational collapse and recovery."},
@@ -137,14 +150,14 @@ const BOOKS = [
    desc:"52 principles from nature for building better organizations: short case studies tracing mechanisms in the natural world into working principles."},
   {id:"the-intimacies-of-ritual", title:"The Intimacies of Ritual", lang:"en", kb:2114,
    desc:"52 customs from around the world, arranged not by geography but by the human questions they answer."},
-  {id:"crisis-management", title:"Crisis Management: 52 Case Studies in Turning Breakdown into Breakthrough", lang:"en", kb:1171,
+  {id:"crisis-management", title:"Crisis Management: 52 Case Studies in Turning Breakdown into Breakthrough", lang:"en", kb:2003,
    desc:"Corporate pivots, PR and cyber-security recoveries, brand re-imagination and personal reinvention: fifty-two case studies organized into six parts."},
   {id:"shadows-in-the-cave", title:"Shadows in the Cave: 52 Thinking Tools for Navigating Your World", lang:"en", kb:1284,
    desc:"Fifty-two classic thought experiments, from Plato's Cave to Asimov's Last Question, each with a real-world professional application, vocabulary and discussion practice."},
-  {id:"humanities-business-school", title:"The Humanities Business School", lang:"en", kb:891,
+  {id:"humanities-business-school", title:"The Humanities Business School", lang:"en", kb:1053,
    desc:"52 lessons from philosophy, literature and social thought: what great thinkers and writers still have to teach a working career."},
-  {id:"masterclass", title:"The Canadian Dream: Masterclass", lang:"en", kb:2539,
-   desc:"The complete course: decoding English for Brazilian professionals, business idioms and phrasal verbs, IELTS, CELPIP and PTE vocabulary, LinkedIn, interviews, citizenship and everyday life in Canada."},
+  {id:"masterclass", featured:true, title:"The Canadian Dream: Masterclass", lang:"en", kb:2539,
+   desc:"Decoding English for Brazilian professionals, business idioms and phrasal verbs, IELTS, CELPIP and PTE vocabulary, LinkedIn, interviews, citizenship and everyday life in Canada."},
 ];
 
 const grid = document.getElementById('grid'), count = document.getElementById('count'), toast = document.getElementById('toast');
@@ -152,7 +165,19 @@ const label = {en:"English", pt:"Português"};
 const fmt = kb => kb >= 1000 ? (kb/1024).toFixed(1)+" MB" : kb+" KB";
 const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
-grid.innerHTML = BOOKS.map(b => `
+const FEATURED = BOOKS.find(b => b.featured);
+if(FEATURED){ const b = FEATURED; document.getElementById('feature').innerHTML = `
+  <a class="art" href="${b.id}/"><img src="covers/${b.id}-wide.jpg" alt="${esc(b.title)}" width="1280" height="720"></a>
+  <div class="txt">
+    <span class="kicker">The complete course</span>
+    <h2><a href="${b.id}/">${esc(b.title)}</a></h2>
+    <p>${esc(b.desc)}</p>
+    <div class="actions">
+      <a class="btn primary" href="books/${b.id}.epub" download>Download <span class="size">· ${fmt(b.kb)}</span></a>
+      <button class="btn ghost" data-share="${b.id}" aria-label="Copy link to ${esc(b.title)}">Link</button>
+    </div>
+  </div>`; }
+grid.innerHTML = BOOKS.filter(b => !b.featured).map(b => `
   <article class="book" id="${b.id}" data-lang="${b.lang}">
     <a class="cover" href="${b.id}/"><img src="covers/${b.id}.jpg" alt="Cover of ${esc(b.title)}" loading="lazy" width="560" height="840"></a>
     <span class="lang">${label[b.lang]}</span>
@@ -175,7 +200,7 @@ function applyFilter(f){
 document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => applyFilter(c.dataset.f)));
 applyFilter('all');
 
-grid.addEventListener('click', async e => {
+document.querySelector('main').addEventListener('click', async e => {
   const b = e.target.closest('[data-share]'); if(!b) return;
   const url = location.origin + location.pathname.replace(/index\.html$/,'') + b.dataset.share + '/';
   try { await navigator.clipboard.writeText(url); show('Link copied'); }

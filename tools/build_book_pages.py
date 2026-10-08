@@ -40,7 +40,7 @@ TPL = """<!doctype html>
 <meta property="og:site_name" content="executiveclass.ca">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
-<meta property="og:image" content="{site}/covers/{id}.jpg">
+<meta property="og:image" content="{site}/covers/{coverfile}">
 <meta property="og:url" content="{site}/{id}/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -74,14 +74,17 @@ h2{{font-family:Fraunces,Georgia,serif;font-size:24px;margin:0 0 16px}}
 .step p{{margin:0;color:var(--muted);font-size:14px}}
 footer{{color:var(--muted);font-size:13px;padding:0 0 40px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}}
 footer a{{color:inherit}}
+
+.book.wide{{grid-template-columns:1fr;gap:28px;padding-top:40px}}
+.book.wide .cover{{aspect-ratio:16/9;background:#000;max-width:none}}
 @media (max-width:640px){{.book{{grid-template-columns:1fr;gap:28px;padding:32px 0 28px}}.cover{{max-width:240px;margin:0 auto}}.btn{{width:100%;justify-content:center}}}}
 </style>
 </head>
 <body>
 <header><div class="wrap"><a href="https://executiveclass.ca">executiveclass.ca</a><span>A Masterclass Series by Ron Taylor</span></div></header>
 <main class="wrap">
-  <article class="book">
-    <div class="cover"><img src="../covers/{id}.jpg" alt="Cover of {title}" width="560" height="840"></div>
+  <article class="book{wideclass}">
+    <div class="cover"><img src="../covers/{coverfile}" alt="Cover of {title}"></div>
     <div>
       <span class="lang">{langlabel}</span>
       <h1>{title}</h1>
@@ -105,7 +108,9 @@ for b in books:
     ht, steps, dl, more = HELP[b["lang"]]
     e = lambda s: html.escape(s, quote=True)
     size = f'{b["kb"]/1024:.1f} MB' if b["kb"] >= 1000 else f'{b["kb"]} KB'
-    page = TPL.format(site=SITE, id=b["id"], title=e(b["title"]), desc=e(b["desc"]),
+    wide = os.path.exists(f"covers/{b['id']}-wide.jpg")
+    page = TPL.format(site=SITE, id=b["id"], wideclass=" wide" if wide else "",
+        coverfile=f"{b['id']}-wide.jpg" if wide else f"{b['id']}.jpg", title=e(b["title"]), desc=e(b["desc"]),
         htmllang="pt-BR" if b["lang"] == "pt" else "en", langlabel=LABEL[b["lang"]],
         dl=dl, size=size, helptitle=ht, more=more,
         steps="".join(f'<div class="step"><b>{t}</b><p>{p}</p></div>' for t, p in steps))
