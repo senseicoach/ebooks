@@ -24,7 +24,7 @@ def block_for(css):
         m = re.search(r'margin-top\s*:\s*(\d+(?:\.\d+)?)%', body) or re.search(r'(?<![-\w])margin\s*:\s*(\d+(?:\.\d+)?)%', body)
         if m and float(m.group(1)) >= 15 and all(not s.startswith('@') for s in sels):
             caps.append((sel.strip(), m.group(1)))
-    chain = ['body > :last-child'] + ['body > :last-child' + ' > :last-child' * i for i in range(1, 5)]
+    chain = ['body > :last-child'] + ['body > :last-child' + ' > :last-child' * i for i in range(1, 7)]
     out = ['', MARK,
            ',\n'.join(chain) + ' { margin-bottom: 0 !important; padding-bottom: 0 !important; }']
     if painted:
