@@ -81,8 +81,8 @@ h2{{font-family:Fraunces,Georgia,serif;font-size:24px;margin:0 0 16px}}
 .step{{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px}}
 .step b{{display:block;margin-bottom:4px}}
 .step p{{margin:0;color:var(--muted);font-size:14px}}
-.seal{{text-align:center;padding:56px 0 26px}}.seal a{{display:inline-block;border-radius:50%;box-shadow:0 10px 24px -14px rgba(0,0,0,.6)}}.seal img{{display:block;width:110px;height:110px}}
-footer{{color:var(--muted);font-size:13px;padding:0 0 40px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}}
+.seal{{text-align:center;padding:56px 0 26px}}.seal a{{display:inline-block;border-radius:50%;box-shadow:0 10px 24px -14px rgba(0,0,0,.6)}}.seal img{{display:block;width:110px;height:110px}}.seal .sitelink{{display:block;margin-top:12px;font-family:Fraunces,Georgia,serif;font-weight:600;font-size:18px;color:var(--gold-title);text-decoration:none;box-shadow:none;border-radius:0}}
+footer{{color:var(--muted);font-size:11px;padding:0 0 40px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}}
 footer a{{color:inherit}}
 
 .book.wide{{grid-template-columns:1fr;gap:28px;padding-top:40px}}
@@ -108,8 +108,8 @@ footer a{{color:inherit}}
     <h2>{helptitle}</h2>
     <div class="steps">{steps}</div>
   </section>
-  <div class="seal"><a href="https://executiveclass.ca" aria-label="Executive Class: executiveclass.ca"><img src="../covers/executiveclass-logo.png?v={v}" alt="Executive Class logo" width="110" height="110"></a></div>
-  <footer><span>© Ron Taylor · <a href="https://executiveclass.ca">executiveclass.ca</a></span><a href="../">{more}</a></footer>
+  <div class="seal"><a href="https://executiveclass.ca" aria-label="Executive Class: executiveclass.ca"><img src="../covers/executiveclass-logo.png?v={v}" alt="Executive Class logo" width="110" height="110"></a><a class="sitelink" href="https://executiveclass.ca">executiveclass.ca</a></div>
+  <footer><span>© Ron Taylor</span><a href="../">{more}</a></footer>
 </main>
 </body>
 </html>
