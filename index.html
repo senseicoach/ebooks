@@ -33,6 +33,7 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:clamp(34px,5vw,5
 a.site{color:var(--gold-title);text-decoration:none}a.site:hover{text-decoration:underline}
 .lede{margin:0;color:var(--gold-ink);font-size:15px;font-weight:600;text-transform:uppercase;white-space:nowrap;display:inline-block}
 header.hero h1{display:inline-block;margin-bottom:4px}
+.spacer{height:72px}
 .bar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:28px 0 8px}
 .filters{display:flex;gap:6px;flex-wrap:wrap}
 .chip{border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:8px 16px;font:500 14px Inter,sans-serif;cursor:pointer}
@@ -104,14 +105,7 @@ footer{color:var(--muted);font-size:13px;padding:0 0 40px}
 
 <main class="wrap">
   <section class="feature" id="feature"></section>
-  <div class="bar">
-    <div class="filters" role="group" aria-label="Filter by language">
-      <button class="chip" data-f="all" aria-pressed="true">All books</button>
-      <button class="chip" data-f="en" aria-pressed="false">English</button>
-      <button class="chip" data-f="pt" aria-pressed="false">Português</button>
-    </div>
-    <div class="count" id="count"></div>
-  </div>
+  <div class="spacer" aria-hidden="true"></div>
   <div class="grid" id="grid"></div>
   <footer class="brandfoot">
     <a href="https://executiveclass.ca" class="seal" aria-label="Executive Class: executiveclass.ca"><img src="covers/executiveclass-logo.png?v=1" alt="Executive Class logo" width="140" height="140"></a>
@@ -158,7 +152,7 @@ const BOOKS = [
    desc:"Decoding English for Global Professionals."},
 ];
 
-const grid = document.getElementById('grid'), count = document.getElementById('count'), toast = document.getElementById('toast');
+const grid = document.getElementById('grid'), toast = document.getElementById('toast');
 const label = {en:"English", pt:"Português"};
 const fmt = kb => kb >= 1000 ? (kb/1024).toFixed(1)+" MB" : kb+" KB";
 const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -187,14 +181,7 @@ grid.innerHTML = BOOKS.filter(b => !b.featured).map(b => `
 
 function show(msg){ toast.textContent = msg; toast.classList.add('show'); clearTimeout(show.t); show.t = setTimeout(()=>toast.classList.remove('show'), 1800); }
 
-function applyFilter(f){
-  let n = 0;
-  document.querySelectorAll('.book').forEach(el => { const on = f === 'all' || el.dataset.lang === f; el.hidden = !on; if(on) n++; });
-  document.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', c.dataset.f === f));
-  count.textContent = n + (n === 1 ? " book" : " books");
-}
-document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => applyFilter(c.dataset.f)));
-applyFilter('all');
+
 
 document.querySelector('main').addEventListener('click', async e => {
   const b = e.target.closest('[data-share]'); if(!b) return;
