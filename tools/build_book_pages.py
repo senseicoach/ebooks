@@ -63,7 +63,7 @@ body{{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-
 header{{border-bottom:1px solid var(--line)}}
 header .wrap{{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:4px 16px;padding:22px 20px 18px}}
 header a{{color:var(--gold-title);text-decoration:none;font-family:Fraunces,Georgia,serif;font-weight:600;font-size:26px}}header a:hover{{text-decoration:underline}}
-header span{{color:var(--gold-ink);font-size:14px;font-weight:500}}
+header span{{color:var(--gold-ink);font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase}}
 .book{{display:grid;grid-template-columns:minmax(0,320px) 1fr;gap:48px;align-items:start;padding:56px 0 40px}}
 .cover{{width:100%;aspect-ratio:2/3;border-radius:8px;overflow:hidden;box-shadow:0 2px 0 rgba(0,0,0,.05),0 24px 48px -20px rgba(0,0,0,.55)}}
 .cover img{{width:100%;height:100%;object-fit:cover;display:block}}
@@ -91,7 +91,7 @@ footer a{{color:inherit}}
 </style>
 </head>
 <body>
-<header><div class="wrap"><a href="https://executiveclass.ca">executiveclass.ca</a><span>Course materials for professionals investing in their success.</span></div></header>
+<header><div class="wrap"><a href="https://executiveclass.ca">executiveclass.ca</a><span>Invest in your success</span></div></header>
 <main class="wrap">
   <article class="book{wideclass}">
     <div class="cover"><img src="../covers/{coverfile}?v={v}" alt="Cover of {title}"></div>

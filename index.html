@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>executiveclass.ca</title>
-<meta name="description" content="Course materials by Ron Taylor for professionals investing in their success.">
+<meta name="description" content="Course materials by Ron Taylor. Invest in your success.">
 <meta property="og:title" content="executiveclass.ca">
 <meta property="og:site_name" content="executiveclass.ca">
-<meta property="og:description" content="Course materials for professionals investing in their success.">
+<meta property="og:description" content="Invest in your success.">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,10 +28,10 @@ body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Inter,system-
 a{color:inherit}
 .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
 
-header.hero{padding:44px 0 4px;text-align:left}
+header.hero{padding:48px 0 8px;text-align:center}
 h1{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:clamp(34px,5vw,52px);line-height:1.05;margin:0 0 8px;letter-spacing:-.01em}
 a.site{color:var(--gold-title);text-decoration:none}a.site:hover{text-decoration:underline}
-.lede{margin:0;color:var(--gold-ink);font-size:17px;font-weight:500;white-space:nowrap;display:inline-block}
+.lede{margin:0;color:var(--gold-ink);font-size:15px;font-weight:600;text-transform:uppercase;white-space:nowrap;display:inline-block}
 header.hero h1{display:inline-block;margin-bottom:4px}
 .bar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:28px 0 8px}
 .filters{display:flex;gap:6px;flex-wrap:wrap}
@@ -98,7 +98,7 @@ footer{color:var(--muted);font-size:13px;padding:0 0 40px}
 <header class="hero">
   <div class="wrap">
     <h1 id="brand"><a class="site" href="https://executiveclass.ca">executiveclass.ca</a></h1><br>
-    <p class="lede" id="tagline">Course materials for professionals investing in their success.</p>
+    <p class="lede" id="tagline">Invest in your success</p>
   </div>
 </header>
 
@@ -124,7 +124,7 @@ footer{color:var(--muted);font-size:13px;padding:0 0 40px}
 <script>
 // To add a book: put the .epub in /books and the cover in /covers (same name), then add a line here.
 // Changes whenever a cover changes, so browsers fetch the new image instead of an old saved copy.
-const V = "b148ffc6";
+const V = "20d0cf39";
 const BOOKS = [
   {id:"the-canadian-networking-code", title:"The Canadian Networking Code", lang:"pt", kb:1057,
    desc:"Como profissionais brasileiros transformam experiência em oportunidade no Canadá. Inclui 100 scripts práticos e um plano de 30/60/90 dias."},
@@ -212,13 +212,17 @@ window.addEventListener('hashchange', toBookPage); toBookPage();
 
 // Size the tagline so it is exactly as wide as "executiveclass.ca" above it.
 function fitTagline(){
+  // Spread the capital letters so the tagline is exactly as wide as "executiveclass.ca".
   const brand = document.querySelector('#brand a'), tag = document.getElementById('tagline');
-  tag.style.whiteSpace = 'nowrap'; tag.style.width = 'auto'; tag.style.fontSize = '20px';
-  const w = brand.getBoundingClientRect().width, tw = tag.getBoundingClientRect().width;
+  tag.style.letterSpacing = '0px'; tag.style.fontSize = '';
+  const w = brand.getBoundingClientRect().width;
+  let tw = tag.getBoundingClientRect().width;
   if (!w || !tw) return;
-  const fs = 20 * w / tw;
-  if (fs >= 12) { tag.style.fontSize = fs.toFixed(2) + 'px'; }
-  else { tag.style.whiteSpace = 'normal'; tag.style.width = w + 'px'; tag.style.fontSize = '13px'; } // small phones: wrap within the same width
+  if (tw > w) { tag.style.fontSize = (15 * w / tw).toFixed(2) + 'px'; tw = tag.getBoundingClientRect().width; }
+  const n = tag.textContent.length;
+  const ls = (w - tw) / n;               // letter-spacing is added after every character
+  tag.style.letterSpacing = ls.toFixed(2) + 'px';
+  tag.style.marginRight = (-ls).toFixed(2) + 'px';   // cancel the space after the last letter so it stays centred
 }
 fitTagline(); window.addEventListener('resize', fitTagline);
 if (document.fonts) document.fonts.ready.then(fitTagline);
