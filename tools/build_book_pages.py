@@ -36,6 +36,44 @@ HELP = {
    "Baixar o ebook", "Mais livros de Ron Taylor"),
 }
 
+# Call to action shown under the download button.
+# OPENING is the first sentence, written for each book. CTA_REST is shared by every book in that language.
+CTA_URL = "https://executiveclass.ca/#cursos"
+CTA_REST = {
+ "en": ("If you want to take your English further, explore Executive Class, Ron Taylor's individual coaching for Brazilian professionals.",
+        "Explore Executive Class →"),
+ "pt": ("Se você quer levar o seu inglês mais longe, conheça a Executive Class, o coaching individual de Ron Taylor para profissionais brasileiros.",
+        "Conheça a Executive Class →"),
+}
+OPENING = {
+ "the-brazilian-edge": "You have already achieved a great deal. Now, learn to recognize the strengths, experience and perspective you bring to Canada—and communicate them with confidence.",
+ "the-first-90-days": "Your first three months set the tone for your career in Canada. Learn the unwritten rules—and use them with confidence.",
+ "the-canadian-networking-code": "A sua experiência já tem valor. Agora, aprenda a transformá-la em oportunidades no Canadá—e a falar sobre ela com confiança.",
+ "the-brazucan-pathway": "Construir uma nova vida exige coragem, e você já deu o primeiro passo. Agora, siga em frente com clareza e confiança.",
+ "comece-com-tudo": "Você já está se preparando para um grande passo. Agora, chegue à universidade pronto para participar com confiança em inglês.",
+ "52-hours-to-a-winning-interview": "Every interview is a chance to show who you are. Learn to tell your story clearly—and give answers people remember.",
+ "why-you-the-art-of-the-interview": "Every interview asks the same question: why you? Learn to know your value, prove it, and communicate it with confidence.",
+ "blue-ocean": "The best strategies don't fight the competition—they make it irrelevant. Learn to think this way, and to discuss these ideas with confidence in English.",
+ "remarkable-canadians": "The people in these pages helped shape the country you now call home. Learn their stories, and talk about Canada with confidence.",
+ "first-principles": "Great ideas begin when someone questions what everyone else accepts. Learn to think differently—and express your thinking with confidence.",
+ "wise-up": "Every great failure carries a lesson for those willing to learn it. Learn from history's hardest decisions, and discuss them with confidence.",
+ "natures-business-model": "Nature has been solving hard problems for millions of years. Learn its principles, and bring them into your work with confidence.",
+ "the-intimacies-of-ritual": "Every culture answers the same human questions in its own way. Learn to see the world through other customs, and talk about them with confidence.",
+ "crisis-management": "Every crisis is also a turning point. Learn how people and organizations turned breakdown into breakthrough—and discuss it with confidence.",
+ "shadows-in-the-cave": "The great thinkers left us tools for seeing clearly. Learn to use them in your work, and to explain your thinking with confidence.",
+ "humanities-business-school": "Philosophy and literature still have much to teach a working career. Learn their lessons, and bring them to your work with confidence.",
+ "masterclass": "Strong English is built one word, one sound and one exercise at a time. Keep building—and speak with confidence.",
+}
+
+# Optional link-preview text (what WhatsApp, LinkedIn etc. show when the page is shared).
+# wide_preview: use covers/<id>-wide.jpg only for the preview; the page itself keeps the normal cover.
+SOCIAL = {
+ "the-brazilian-edge": dict(
+   title="The Brazilian Edge · Livro gratuito de Ron Taylor",
+   desc="The Brazilian Edge é um material gratuito para profissionais brasileiros que se preparam para construir o seu futuro no Canadá. A Executive Class oferece coaching individual de inglês para um número limitado de profissionais que querem se comunicar com mais confiança e impacto.",
+   locale="pt_BR", alt="The Brazilian Edge, livro gratuito de Ron Taylor", wide_preview=True),
+}
+
 TPL = """<!doctype html>
 <html lang="{htmllang}">
 <head>
@@ -45,10 +83,10 @@ TPL = """<!doctype html>
 <meta name="description" content="{desc}">
 <meta property="og:type" content="book">
 <meta property="og:site_name" content="executiveclass.ca">
-<meta property="og:title" content="{title}">
-<meta property="og:description" content="{desc}">
-<meta property="og:image" content="{site}/covers/{coverfile}">
-<meta property="og:url" content="{site}/{id}/">
+<meta property="og:title" content="{ogtitle}">
+<meta property="og:description" content="{ogdesc}">
+{ogextra}<meta property="og:image" content="{site}/covers/{ogimage}">
+{ogimgextra}<meta property="og:url" content="{site}/{id}/">
 <link rel="icon" type="image/png" href="../favicon.png">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -75,6 +113,7 @@ h1{{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:clamp(30px,5vw,
 @media (prefers-color-scheme: dark){{.btn{{background:var(--gold);color:#14213a}}}}
 .btn:focus-visible{{outline:2px solid var(--focus);outline-offset:3px}}
 .meta{{display:block;margin-top:10px;color:var(--muted);font-size:13px}}
+.cta{{margin:32px 0 0;padding:22px 24px;background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:12px;max-width:56ch}}.cta p{{margin:0 0 12px;font-size:16px}}.cta p.lead{{font-family:Fraunces,Georgia,serif;font-size:19px;line-height:1.4}}.cta p.sub{{color:var(--muted);font-size:15px;margin-bottom:16px}}.cta a{{display:inline-flex;align-items:center;text-decoration:none;border-radius:10px;padding:11px 20px;font:600 15px Inter,sans-serif;color:var(--gold-title);border:1px solid var(--gold)}}.cta a:hover{{background:var(--gold);color:#14213a}}.cta a:focus-visible{{outline:2px solid var(--focus);outline-offset:3px}}@media (max-width:640px){{.cta{{padding:18px}}.cta a{{width:100%;justify-content:center}}}}
 section{{border-top:1px solid var(--line);padding:36px 0 40px}}
 h2{{font-family:Fraunces,Georgia,serif;font-size:24px;margin:0 0 16px}}
 .steps{{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}}
@@ -102,7 +141,7 @@ footer a{{color:inherit}}
       <p class="desc">{desc}</p>
       <a class="btn" href="../books/{id}.epub" download>{dl}</a>
       <span class="meta">EPUB · {size}</span>
-    </div>
+{cta}    </div>
   </article>
   <section>
     <h2>{helptitle}</h2>
@@ -119,9 +158,27 @@ for b in books:
     ht, steps, dl, more = HELP[b["lang"]]
     e = lambda s: html.escape(s, quote=True)
     size = f'{b["kb"]/1024:.1f} MB' if b["kb"] >= 1000 else f'{b["kb"]} KB'
-    wide = os.path.exists(f"covers/{b['id']}-wide.jpg")
+    soc = SOCIAL.get(b["id"], {})
+    has_wide = os.path.exists(f"covers/{b['id']}-wide.jpg")
+    wide = has_wide and not soc.get("wide_preview")          # wide cover on the page itself
+    coverfile = f"{b['id']}-wide.jpg" if wide else f"{b['id']}.jpg"
+    ogimage = f"{b['id']}-wide.jpg" if has_wide and soc.get("wide_preview") else coverfile
+    ogextra = f'<meta property="og:locale" content="{soc["locale"]}">\n' if soc.get("locale") else ""
+    ogimgextra = ""
+    if soc.get("wide_preview"):
+        ogimgextra = ('<meta property="og:image:type" content="image/jpeg">\n<meta property="og:image:width" content="1200">\n'
+                      '<meta property="og:image:height" content="630">\n'
+                      + (f'<meta property="og:image:alt" content="{e(soc["alt"])}">\n' if soc.get("alt") else "")
+                      + '<meta name="twitter:card" content="summary_large_image">\n')
+    cta = ""
+    if b["id"] in OPENING:
+        rest, btn = CTA_REST[b["lang"]]
+        cta = (f'      <aside class="cta">\n        <p class="lead">{e(OPENING[b["id"]])}</p>\n'
+               f'        <p class="sub">{e(rest)}</p>\n        <a href="{CTA_URL}">{btn}</a>\n      </aside>\n')
     page = TPL.format(v=V, site=SITE, id=b["id"], wideclass=" wide" if wide else "",
-        coverfile=f"{b['id']}-wide.jpg" if wide else f"{b['id']}.jpg", title=e(b["title"]), desc=e(b["desc"]),
+        coverfile=coverfile, ogimage=ogimage, ogextra=ogextra, ogimgextra=ogimgextra, cta=cta,
+        ogtitle=e(soc.get("title", b["title"])), ogdesc=e(soc.get("desc", b["desc"])),
+        title=e(b["title"]), desc=e(b["desc"]),
         htmllang="pt-BR" if b["lang"] == "pt" else "en", langlabel=LABEL[b["lang"]],
         dl=dl, size=size, helptitle=ht, more=more,
         steps="".join(f'<div class="step"><b>{t}</b><p>{p}</p></div>' for t, p in steps))
