@@ -22,13 +22,13 @@ open("index.html", "w", encoding="utf-8").write(src)
 
 LABEL = {"en": "English", "pt": "Português"}
 HELP = {
- "en": ("How to open your book", [
+ "en": ("Need help opening the book?", [
    ("iPhone or iPad", "Tap <em>Download</em>, then tap <em>Open in Books</em>. If you don't see that, tap the Share button and choose <em>Books</em>."),
    ("Mac", "Download the file, then double-click it in your Downloads folder. It opens in Apple Books."),
    ("Android or Windows", "Install a free EPUB reader such as Google Play Books (Android) or Thorium Reader (Windows), then open the downloaded file with it."),
    ("Kindle", "Go to amazon.com/sendtokindle, sign in and upload the .epub file. It appears on your Kindle in a few minutes.")],
    "Download the ebook", "More books by Ron Taylor"),
- "pt": ("Como abrir o seu livro", [
+ "pt": ("Precisa de ajuda para abrir o livro?", [
    ("iPhone ou iPad", "Toque em <em>Baixar</em> e depois em <em>Abrir no Livros</em>. Se não aparecer, toque no botão Compartilhar e escolha <em>Livros</em>."),
    ("Mac", "Baixe o arquivo e clique duas vezes nele na pasta Downloads. Ele abre no Apple Books."),
    ("Android ou Windows", "Instale um leitor de EPUB gratuito, como o Google Play Livros (Android) ou o Thorium Reader (Windows), e abra o arquivo baixado."),
@@ -114,8 +114,8 @@ h1{{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:clamp(30px,5vw,
 .btn:focus-visible{{outline:2px solid var(--focus);outline-offset:3px}}
 .meta{{display:block;margin-top:10px;color:var(--muted);font-size:13px}}
 .cta{{margin:32px 0 0;padding:22px 24px;background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:12px;max-width:56ch}}.cta p{{margin:0 0 12px;font-size:16px}}.cta p.lead{{font-family:Fraunces,Georgia,serif;font-size:19px;line-height:1.4}}.cta p.sub{{color:var(--muted);font-size:15px;margin-bottom:16px}}.cta a{{display:inline-flex;align-items:center;text-decoration:none;border-radius:10px;padding:11px 20px;font:600 15px Inter,sans-serif;color:var(--gold-title);border:1px solid var(--gold)}}.cta a:hover{{background:var(--gold);color:#14213a}}.cta a:focus-visible{{outline:2px solid var(--focus);outline-offset:3px}}@media (max-width:640px){{.cta{{padding:18px}}.cta a{{width:100%;justify-content:center}}}}
-section{{border-top:1px solid var(--line);padding:36px 0 40px}}
-h2{{font-family:Fraunces,Georgia,serif;font-size:24px;margin:0 0 16px}}
+section.help{{border-top:1px solid var(--line);padding:20px 0 8px}}
+section.help summary{{cursor:pointer;color:var(--muted);font-size:15px;padding:8px 0;list-style:none;display:inline-flex;align-items:center;gap:8px}}section.help summary::-webkit-details-marker{{display:none}}section.help summary::before{{content:"+";display:inline-grid;place-items:center;width:20px;height:20px;border:1px solid var(--line);border-radius:50%;font-size:14px;line-height:1}}section.help details[open] summary::before{{content:"−"}}section.help summary:hover{{color:var(--ink)}}section.help summary:focus-visible{{outline:2px solid var(--focus);outline-offset:3px;border-radius:4px}}section.help .steps{{margin:14px 0 16px}}
 .steps{{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}}
 .step{{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px}}
 .step b{{display:block;margin-bottom:4px}}
@@ -143,10 +143,10 @@ footer a{{color:inherit}}
       <span class="meta">EPUB · {size}</span>
 {cta}    </div>
   </article>
-  <section>
-    <h2>{helptitle}</h2>
+  <section class="help"><details>
+    <summary>{helptitle}</summary>
     <div class="steps">{steps}</div>
-  </section>
+  </details></section>
   <div class="seal"><a href="https://executiveclass.ca" aria-label="Executive Class: executiveclass.ca"><img src="../covers/executiveclass-logo.png?v={v}" alt="Executive Class logo" width="110" height="110"></a><a class="sitelink" href="https://executiveclass.ca">executiveclass.ca</a></div>
   <footer><span>© Ron Taylor</span><a href="../">{more}</a></footer>
 </main>
