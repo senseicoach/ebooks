@@ -46,6 +46,7 @@ CTA_REST = {
         "Conheça a Executive Class →"),
 }
 OPENING = {
+ "evolving": "You are more than the label you arrived with. Discover who you could become—and ride the wave of change with confidence.",
  "the-brazilian-edge": "You have already achieved a great deal. Now, learn to recognize the strengths, experience and perspective you bring to Canada—and communicate them with confidence.",
  "the-first-90-days": "Your first three months set the tone for your career in Canada. Learn the unwritten rules—and use them with confidence.",
  "the-canadian-networking-code": "A sua experiência já tem valor. Agora, aprenda a transformá-la em oportunidades no Canadá—e a falar sobre ela com confiança.",
