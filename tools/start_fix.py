@@ -2,6 +2,7 @@
 """Make an EPUB open on its first page, with that page centred in two-page view.
 Changes only the package file (.opf) and the navigation landmarks; page content is untouched.
   - removes "start reading here" markers (landmark bodymatter / guide text) that skip the first page
+  - removes epub:type="bodymatter" from <body> tags (Apple Books opens at the first page tagged this way)
   - puts the cover page first in reading order if it exists but was left out
   - marks the first page rendition:page-spread-center (reflowable books only)
 Usage: python3 tools/start_fix.py in.epub out.epub
@@ -55,6 +56,16 @@ def main(src, dst):
             data = z.read(info.filename)
             if info.filename == opf_path:
                 data = opf.encode('utf-8')
+            elif info.filename.endswith(('.xhtml', '.html')) and re.search(rb'<body\b[^>]*epub:type="[^"]*bodymatter', data):
+                # Apple Books opens a book at the first page whose <body> says "bodymatter",
+                # skipping everything before it. Drop that one word; nothing visible changes.
+                t = data.decode('utf-8')
+                def body(m):
+                    tag = re.sub(r'\bbodymatter\b\s*', '', m.group(0))
+                    return re.sub(r'\s*epub:type="\s*"', '', tag)
+                t = re.sub(r'<body\b[^>]*>', body, t, count=1)
+                if 'body start marker removed' not in notes: notes.append('body start marker removed')
+                data = t.encode('utf-8')
             elif info.filename.endswith(('.xhtml', '.html')) and b'landmarks' in data:
                 t = data.decode('utf-8')
                 def lm(nav):
