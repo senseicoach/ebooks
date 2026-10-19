@@ -27,13 +27,13 @@ HELP = {
    ("Mac", "Download the file, then double-click it in your Downloads folder. It opens in Apple Books."),
    ("Android or Windows", "Install a free EPUB reader such as Google Play Books (Android) or Thorium Reader (Windows), then open the downloaded file with it."),
    ("Kindle", "Go to amazon.com/sendtokindle, sign in and upload the .epub file. It appears on your Kindle in a few minutes.")],
-   "Download the ebook", "More books by Ron Taylor"),
+   "Download the ebook", "More free resources"),
  "pt": ("Precisa de ajuda para abrir o livro?", [
    ("iPhone ou iPad", "Toque em <em>Baixar</em> e depois em <em>Abrir no Livros</em>. Se não aparecer, toque no botão Compartilhar e escolha <em>Livros</em>."),
    ("Mac", "Baixe o arquivo e clique duas vezes nele na pasta Downloads. Ele abre no Apple Books."),
    ("Android ou Windows", "Instale um leitor de EPUB gratuito, como o Google Play Livros (Android) ou o Thorium Reader (Windows), e abra o arquivo baixado."),
    ("Kindle", "Acesse amazon.com/sendtokindle, entre na sua conta e envie o arquivo .epub. Ele aparece no seu Kindle em poucos minutos.")],
-   "Baixar o ebook", "Mais livros de Ron Taylor"),
+   "Baixar o ebook", "Mais recursos gratuitos"),
 }
 
 # Call to action shown under the download button.
