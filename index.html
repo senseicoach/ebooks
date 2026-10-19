@@ -71,6 +71,18 @@ header.hero h1{display:inline-block;margin-bottom:4px}
 .btn:focus-visible,.chip:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
 .size{font-weight:400;opacity:.75}
 
+section.labs{border-top:1px solid var(--line);padding:44px 0 8px}
+section.labs h2{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:clamp(26px,3.4vw,34px);margin:0 0 8px}
+.labs-intro{color:var(--muted);max-width:62ch;margin:0 0 6px}
+.labs-steps{color:var(--ink);max-width:62ch;margin:0 0 24px;font-weight:500}
+.labs-steps a{color:inherit}
+.lab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+.lab{display:flex;flex-direction:column;gap:6px;background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:12px;padding:16px 18px;text-decoration:none;color:var(--ink);transition:box-shadow .2s,transform .2s}
+.lab:hover{box-shadow:0 10px 30px -12px rgba(20,33,58,.35);transform:translateY(-2px)}
+.lab:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.lab b{font-family:Fraunces,Georgia,serif;font-size:19px;font-weight:600}
+.lab span{color:var(--muted);font-size:14px}
+.lab em{font-style:normal;font-size:13px;font-weight:600;color:var(--gold-ink);margin-top:auto;padding-top:6px}
 section.help{border-top:1px solid var(--line);padding:40px 0 56px}
 section.help h3{font-family:Fraunces,Georgia,serif;font-size:26px;margin:0 0 18px}
 .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
@@ -107,6 +119,18 @@ footer{color:var(--muted);font-size:13px;padding:0 0 40px}
   <section class="feature" id="feature"></section>
   <div class="spacer" aria-hidden="true"></div>
   <div class="grid" id="grid"></div>
+  <section class="labs" id="labs" aria-labelledby="labs-h">
+    <h2 id="labs-h">Listening Labs</h2>
+    <p class="labs-intro">Free, like the books. Authentic Canadian English, one short story at a time: listen, transcribe and find out what you missed and why.</p>
+    <p class="labs-steps">The first three steps you can do on your own. The fourth, speaking, you do with me. <a href="https://executiveclass.ca/#aplicar">Book your Preboarding Assessment →</a></p>
+    <div class="lab-grid">
+      <a class="lab" href="https://senseicoach.github.io/listening-lab/" target="_blank" rel="noopener"><b>Listening Lab</b><span>Everyday life in Canada: the bank, the doctor, school, work and the neighbours.</span><em>Open the lab →</em></a>
+      <a class="lab" href="https://senseicoach.github.io/interview-lab/" target="_blank" rel="noopener"><b>Interview Lab</b><span>Real job-interview answers, from the first question to the last.</span><em>Open the lab →</em></a>
+      <a class="lab" href="https://senseicoach.github.io/OFFICE-LAB/" target="_blank" rel="noopener"><b>Office Listening Lab</b><span>Your first weeks at work: meetings, small talk, IT and your manager.</span><em>Open the lab →</em></a>
+      <a class="lab" href="https://senseicoach.github.io/NETWORKING-LAB/" target="_blank" rel="noopener"><b>Networking Listening Lab</b><span>Coffee chats, events and introductions that open doors.</span><em>Open the lab →</em></a>
+      <a class="lab" href="https://senseicoach.github.io/UNIVERSITY-LISTENING-LAB/" target="_blank" rel="noopener"><b>University Listening Lab</b><span>Lectures, office hours and group work at a Canadian college or university.</span><em>Open the lab →</em></a>
+    </div>
+  </section>
   <footer class="brandfoot">
     <a href="https://executiveclass.ca" class="seal" aria-label="Executive Class: executiveclass.ca"><img src="covers/executiveclass-logo.png?v=1" alt="Executive Class logo" width="140" height="140"></a>
     <a class="sitelink" href="https://executiveclass.ca">executiveclass.ca</a>
