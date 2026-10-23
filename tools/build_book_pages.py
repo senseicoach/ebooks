@@ -3,7 +3,7 @@
 Run from the repository root:  python3 tools/build_book_pages.py"""
 import re, html, os, hashlib
 
-SITE = "https://senseicoach.github.io/ebooks"
+SITE = "https://executiveclass.ca/ebooks"
 src = open("index.html", encoding="utf-8").read()
 block = re.search(r"const BOOKS = \[(.*?)\n\];", src, re.S).group(1)
 books = []
