@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>executiveclass.ca</title>
+<title>Biblioteca gratuita · Executive Class</title>
 <meta name="description" content="Livros digitais e Listening Labs gratuitos para profissionais brasileiros que estão construindo o futuro no Canadá.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="executiveclass.ca">
@@ -113,15 +113,21 @@ footer{color:var(--muted);font-size:13px;padding:0 0 40px}
   .btn.ghost{flex:1}
   .size{display:none}
 }
+.langbar{display:flex;justify-content:flex-end;padding:16px 0 0}
+.lang-toggle{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--paper)}
+.lang-toggle button{border:0;background:none;color:var(--muted);font:600 12px/1 Inter,sans-serif;letter-spacing:.12em;padding:9px 14px;min-width:44px;min-height:36px;cursor:pointer}
+.lang-toggle button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.lang-toggle button:focus-visible{outline:2px solid var(--focus);outline-offset:-2px}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);opacity:0;background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;font-size:14px;transition:.2s;pointer-events:none}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
 </head>
 <body>
+<div class="wrap langbar"><div class="lang-toggle" role="group" aria-label="Idioma / Language"><button type="button" data-lang="pt" aria-pressed="true">PT</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div></div>
 <header class="hero">
   <div class="wrap">
     <h1 id="brand"><a class="site" href="https://executiveclass.ca">executiveclass.ca</a></h1><br>
-    <p class="lede" id="tagline">Invest in your success</p>
+    <p class="lede" id="tagline" data-t="tagline">Invista no seu sucesso</p>
   </div>
 </header>
 
@@ -131,17 +137,17 @@ footer{color:var(--muted);font-size:13px;padding:0 0 40px}
   <div class="grid" id="grid"></div>
   <section class="labs" id="labs" aria-labelledby="labs-h">
     <h2 id="labs-h">Listening Labs</h2>
-    <p class="labs-intro">Free, like the books. One short story at a time: listen, transcribe and find out what you missed and why.</p>
-    <p class="labs-steps">Ready to work with me? <a href="https://executiveclass.ca/#aplicar">Book your Preboarding Assessment →</a></p>
+    <p class="labs-intro" data-t="labsIntro">Free, like the books. One short story at a time: listen, transcribe and find out what you missed and why.</p>
+    <p class="labs-steps" data-t="labsSteps" data-html>Ready to work with me? <a href="https://executiveclass.ca/#aplicar">Book your Preboarding Assessment →</a></p>
     <div class="lab-grid">
-      <a class="lab" href="https://executiveclass.ca/listening-lab/" target="_blank" rel="noopener"><small>100 scripts</small><b>Listening Lab</b><span>Everyday life in Canada: the bank, the doctor, school, work and the neighbours.</span><em>Open the lab →</em></a>
-      <a class="lab" href="https://executiveclass.ca/interview-lab/" target="_blank" rel="noopener"><small>76 scripts</small><b>Interview Lab</b><span>Real job-interview answers, from the first question to the last.</span><em>Open the lab →</em></a>
-      <a class="lab" href="https://executiveclass.ca/OFFICE-LAB/" target="_blank" rel="noopener"><small>87 scripts</small><b>Office Listening Lab</b><span>Your first year at work: meetings, feedback, phone calls and your manager.</span><em>Open the lab →</em></a>
-      <a class="lab" href="https://executiveclass.ca/NETWORKING-LAB/" target="_blank" rel="noopener"><small>95 scripts</small><b>Networking Listening Lab</b><span>Coffee chats, events, recruiters and phone calls that open doors.</span><em>Open the lab →</em></a>
-      <a class="lab" href="https://executiveclass.ca/UNIVERSITY-LISTENING-LAB/" target="_blank" rel="noopener"><small>87 scripts</small><b>University Listening Lab</b><span>Lectures, office hours, group work and the details professors announce in class.</span><em>Open the lab →</em></a>
-      <a class="lab" href="https://executiveclass.ca/french-lab/" target="_blank" rel="noopener"><small>100 scripts</small><b>French Listening Lab</b><span>Québécois French in Montréal, from first words to NCLC 7, for learners studying French with a teacher.</span><em>Open the lab →</em></a>
-      <a class="lab" href="https://executiveclass.ca/NETWORKING-LAB/#alphabet" target="_blank" rel="noopener"><small>40 practice items</small><b>Phone Alphabet Drill</b><span>Names, numbers and email addresses on the phone, and the letters Brazilians mix up.</span><em>Open the drill →</em></a>
-      <a class="lab" href="https://executiveclass.ca/vocab-library/" target="_blank" rel="noopener"><small>286 decks</small><b>Executive Class Lab Cards</b><span>Vocabulary flashcards for work and life in Canada, in six languages.</span><em>Open the cards →</em></a>
+      <a class="lab" href="https://executiveclass.ca/listening-lab/" target="_blank" rel="noopener"><small data-t="lab_listening_n">100 scripts</small><b>Listening Lab</b><span data-t="lab_listening_d">Everyday life in Canada: the bank, the doctor, school, work and the neighbours.</span><em data-t="lab_listening_o">Open the lab →</em></a>
+      <a class="lab" href="https://executiveclass.ca/interview-lab/" target="_blank" rel="noopener"><small data-t="lab_interview_n">76 scripts</small><b>Interview Lab</b><span data-t="lab_interview_d">Real job-interview answers, from the first question to the last.</span><em data-t="lab_interview_o">Open the lab →</em></a>
+      <a class="lab" href="https://executiveclass.ca/OFFICE-LAB/" target="_blank" rel="noopener"><small data-t="lab_office_n">87 scripts</small><b>Office Listening Lab</b><span data-t="lab_office_d">Your first year at work: meetings, feedback, phone calls and your manager.</span><em data-t="lab_office_o">Open the lab →</em></a>
+      <a class="lab" href="https://executiveclass.ca/NETWORKING-LAB/" target="_blank" rel="noopener"><small data-t="lab_networking_n">95 scripts</small><b>Networking Listening Lab</b><span data-t="lab_networking_d">Coffee chats, events, recruiters and phone calls that open doors.</span><em data-t="lab_networking_o">Open the lab →</em></a>
+      <a class="lab" href="https://executiveclass.ca/UNIVERSITY-LISTENING-LAB/" target="_blank" rel="noopener"><small data-t="lab_university_n">87 scripts</small><b>University Listening Lab</b><span data-t="lab_university_d">Lectures, office hours, group work and the details professors announce in class.</span><em data-t="lab_university_o">Open the lab →</em></a>
+      <a class="lab" href="https://executiveclass.ca/french-lab/" target="_blank" rel="noopener"><small data-t="lab_french_n">100 scripts</small><b>French Listening Lab</b><span data-t="lab_french_d">Québécois French in Montréal, from first words to NCLC 7, for learners studying French with a teacher.</span><em data-t="lab_french_o">Open the lab →</em></a>
+      <a class="lab" href="https://executiveclass.ca/NETWORKING-LAB/#alphabet" target="_blank" rel="noopener"><small data-t="lab_alphabet_n">40 practice items</small><b>Phone Alphabet Drill</b><span data-t="lab_alphabet_d">Names, numbers and email addresses on the phone, and the letters Brazilians mix up.</span><em data-t="lab_alphabet_o">Open the drill →</em></a>
+      <a class="lab" href="https://executiveclass.ca/vocab-library/" target="_blank" rel="noopener"><small data-t="lab_cards_n">286 decks</small><b>Executive Class Lab Cards</b><span data-t="lab_cards_d">Vocabulary flashcards for work and life in Canada, in six languages.</span><em data-t="lab_cards_o">Open the cards →</em></a>
     </div>
   </section>
   <footer class="brandfoot">
@@ -196,41 +202,120 @@ const BOOKS = [
 ];
 
 const grid = document.getElementById('grid'), toast = document.getElementById('toast');
-const label = {en:"English", pt:"Português"};
 const fmt = kb => kb >= 1000 ? (kb/1024).toFixed(1)+" MB" : kb+" KB";
 const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
-const FEATURED = BOOKS.find(b => b.featured);
-if(FEATURED){ const b = FEATURED; document.getElementById('feature').innerHTML = `
+// Page text in both languages. Portuguese is the default.
+const T = {
+  pt: {
+    title: "Biblioteca gratuita · Executive Class",
+    tagline: "Invista no seu sucesso",
+    langName: {en:"Inglês", pt:"Português"},
+    download: "Baixar", link: "Link", copyTitle: "Copiar o link deste livro",
+    copyAria: t => "Copiar o link de " + t, cover: t => "Capa de " + t,
+    copied: "Link copiado", copyPrompt: "Copie este link:",
+    labsIntro: "Gratuitos, como os livros. Uma história curta de cada vez: ouça, transcreva e descubra o que você deixou passar e por quê.",
+    labsSteps: 'Quer trabalhar comigo? <a href="https://executiveclass.ca/#aplicar">Agende o seu Preboarding Assessment →</a>',
+    lab_listening_n: "100 histórias", lab_listening_d: "O dia a dia no Canadá: o banco, o médico, a escola, o trabalho e os vizinhos.", lab_listening_o: "Abrir o lab →",
+    lab_interview_n: "76 histórias", lab_interview_d: "Respostas reais de entrevistas de emprego, da primeira à última pergunta.", lab_interview_o: "Abrir o lab →",
+    lab_office_n: "87 histórias", lab_office_d: "O seu primeiro ano no trabalho: reuniões, feedback, telefonemas e o seu gestor.", lab_office_o: "Abrir o lab →",
+    lab_networking_n: "95 histórias", lab_networking_d: "Cafés, eventos, recrutadores e telefonemas que abrem portas.", lab_networking_o: "Abrir o lab →",
+    lab_university_n: "87 histórias", lab_university_d: "Aulas, horário de atendimento, trabalhos em grupo e os avisos que os professores dão em sala.", lab_university_o: "Abrir o lab →",
+    lab_french_n: "100 conversas", lab_french_d: "Francês quebequense em Montréal, das primeiras palavras ao NCLC 7, para quem estuda francês com um professor.", lab_french_o: "Abrir o lab →",
+    lab_alphabet_n: "40 exercícios", lab_alphabet_d: "Nomes, números e e-mails ao telefone, e as letras que os brasileiros confundem.", lab_alphabet_o: "Abrir o exercício →",
+    lab_cards_n: "286 baralhos", lab_cards_d: "Flashcards de vocabulário para o trabalho e a vida no Canadá, em seis idiomas.", lab_cards_o: "Abrir os cards →"
+  },
+  en: {
+    title: "Free library · Executive Class",
+    tagline: "Invest in your success",
+    langName: {en:"English", pt:"Portuguese"},
+    download: "Download", link: "Link", copyTitle: "Copy a link to this book",
+    copyAria: t => "Copy link to " + t, cover: t => "Cover of " + t,
+    copied: "Link copied", copyPrompt: "Copy this link:",
+    labsIntro: "Free, like the books. One short story at a time: listen, transcribe and find out what you missed and why.",
+    labsSteps: 'Ready to work with me? <a href="https://executiveclass.ca/#aplicar">Book your Preboarding Assessment →</a>',
+    lab_listening_n: "100 scripts", lab_listening_d: "Everyday life in Canada: the bank, the doctor, school, work and the neighbours.", lab_listening_o: "Open the lab →",
+    lab_interview_n: "76 scripts", lab_interview_d: "Real job-interview answers, from the first question to the last.", lab_interview_o: "Open the lab →",
+    lab_office_n: "87 scripts", lab_office_d: "Your first year at work: meetings, feedback, phone calls and your manager.", lab_office_o: "Open the lab →",
+    lab_networking_n: "95 scripts", lab_networking_d: "Coffee chats, events, recruiters and phone calls that open doors.", lab_networking_o: "Open the lab →",
+    lab_university_n: "87 scripts", lab_university_d: "Lectures, office hours, group work and the details professors announce in class.", lab_university_o: "Open the lab →",
+    lab_french_n: "100 scripts", lab_french_d: "Québécois French in Montréal, from first words to NCLC 7, for learners studying French with a teacher.", lab_french_o: "Open the lab →",
+    lab_alphabet_n: "40 practice items", lab_alphabet_d: "Names, numbers and email addresses on the phone, and the letters Brazilians mix up.", lab_alphabet_o: "Open the drill →",
+    lab_cards_n: "286 decks", lab_cards_d: "Vocabulary flashcards for work and life in Canada, in six languages.", lab_cards_o: "Open the cards →"
+  }
+};
+// Book descriptions in the other language. A book missing here shows its own description in both.
+const DESC = {
+  pt: {
+    "the-first-90-days": "52 casos sobre como passar pelo período de experiência no Canadá: as regras não escritas, as frases que funcionam e a reputação que você constrói nos três primeiros meses. Para profissionais brasileiros no primeiro emprego no Canadá.",
+    "the-brazilian-edge": "52 lições sobre o que você traz para o Canadá e como usar isso: um curso de autoanálise em inglês sobre o seu maior desafio, por que você teve sucesso, o que aprendeu sobre si mesmo e as qualidades de quem domina o inglês e a imigração.",
+    "52-hours-to-a-winning-interview": "Cinquenta e dois casos, respostas fortes analisadas em detalhe e as palavras, os sons e os documentos que decidem uma entrevista. Para brasileiros construindo a carreira no Canadá.",
+    "why-you-the-art-of-the-interview": "Toda pergunta de entrevista é a mesma pergunta com outra roupa. Conheça o seu valor, comprove-o e comunique-o.",
+    "blue-ocean": "Do Cirque du Soleil e da Southwest Airlines ao Nubank e às Havaianas, cada caso analisado com a matriz Eliminar-Reduzir-Elevar-Criar, vocabulário, exercícios práticos e gabarito.",
+    "remarkable-canadians": "Cinquenta e dois perfis de canadenses marcantes, um simulado de cidadania e um último perfil: o seu.",
+    "first-principles": "52 histórias sobre pensar diferente: um curso de leitura e pensamento crítico para alunos avançados de inglês e de inglês para negócios.",
+    "wise-up": "Decisões que fizeram história: cinquenta e dois estudos de caso sobre desastres, tomada de decisão, colapso organizacional e recuperação.",
+    "natures-business-model": "52 princípios da natureza para construir organizações melhores: estudos de caso curtos que transformam mecanismos do mundo natural em princípios de trabalho.",
+    "the-intimacies-of-ritual": "52 costumes do mundo inteiro, organizados não por geografia, mas pelas perguntas humanas que eles respondem.",
+    "crisis-management": "Viradas corporativas, recuperações de imagem e de cibersegurança, reinvenção de marcas e reinvenção pessoal: cinquenta e dois estudos de caso organizados em seis partes.",
+    "shadows-in-the-cave": "Cinquenta e dois experimentos mentais clássicos, da Caverna de Platão à Última Pergunta de Asimov, cada um com uma aplicação profissional real, vocabulário e prática de discussão.",
+    "evolving": "Catorze capítulos sobre quem você pode se tornar quando o seu mundo muda, da emigração à IA: questione o rótulo, descubra pontos fortes que você não via e continue crescendo, sem deixar de ser responsável pelo seu próprio pensamento e pelas suas escolhas.",
+    "humanities-business-school": "52 lições da filosofia, da literatura e do pensamento social: o que grandes pensadores e escritores ainda têm a ensinar a uma carreira.",
+    "masterclass": "O livro-texto central de todos os cursos da Executive Class: mais de 150 temas de vocabulário, prática de pronúncia e exercícios, em cerca de 1.100 páginas."
+  },
+  en: {
+    "the-canadian-networking-code": "How Brazilian professionals turn experience into opportunity in Canada. Includes 100 practical scripts and a 30/60/90-day plan.",
+    "the-brazucan-pathway": "A psychological GPS for building your life in Canada: from status shock and grieving from afar to rebuilding your career and belonging.",
+    "comece-com-tudo": "A bilingual guide to preparing for university in Canada: explanations in Portuguese, models in English."
+  }
+};
+const descOf = (b, L) => (DESC[L] && DESC[L][b.id]) || b.desc;
+
+let LANG = "pt";
+try { const q = new URLSearchParams(location.search).get("lang"); LANG = (q === "en" || q === "pt") ? q : (localStorage.getItem("lib:lang") || "pt"); } catch {}
+if (LANG !== "en") LANG = "pt";
+
+function render(){
+  const t = T[LANG];
+  document.documentElement.lang = LANG === "pt" ? "pt-BR" : "en";
+  document.title = t.title;
+  document.querySelectorAll('.lang-toggle button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === LANG)));
+  document.querySelectorAll('[data-t]').forEach(el => { const v = t[el.dataset.t]; if (v === undefined) return; if (el.hasAttribute('data-html')) el.innerHTML = v; else el.textContent = v; });
+  const FEATURED = BOOKS.find(b => b.featured);
+  if(FEATURED){ const b = FEATURED; document.getElementById('feature').innerHTML = `
   <a class="art" href="${b.id}/"><img src="covers/${b.id}-logo.jpg?v=${V}" alt="${esc(b.title)}"></a>
   <div class="txt">
-    <p>${esc(b.desc)}</p>
+    <p>${esc(descOf(b, LANG))}</p>
   </div>
   <div class="actions">
-    <a class="btn primary" href="books/${b.id}.epub" download>Download <span class="size">· ${fmt(b.kb)}</span></a>
-    <button class="btn ghost" data-share="${b.id}" aria-label="Copy link to ${esc(b.title)}">Link</button>
+    <a class="btn primary" href="books/${b.id}.epub" download>${t.download} <span class="size">· ${fmt(b.kb)}</span></a>
+    <button class="btn ghost" data-share="${b.id}" aria-label="${esc(t.copyAria(b.title))}">${t.link}</button>
   </div>`; }
-grid.innerHTML = BOOKS.filter(b => !b.featured).map(b => `
+  grid.innerHTML = BOOKS.filter(b => !b.featured).map(b => `
   <article class="book" id="${b.id}" data-lang="${b.lang}">
-    <a class="cover" href="${b.id}/"><img src="covers/${b.id}.jpg?v=${V}" alt="Cover of ${esc(b.title)}" loading="lazy" width="560" height="840"></a>
-    <span class="lang">${label[b.lang]}</span>
+    <a class="cover" href="${b.id}/"><img src="covers/${b.id}.jpg?v=${V}" alt="${esc(t.cover(b.title))}" loading="lazy" width="560" height="840"></a>
+    <span class="lang">${t.langName[b.lang]}</span>
     <h2><a href="${b.id}/">${esc(b.title)}</a></h2>
-    <p>${esc(b.desc)}</p>
+    <p>${esc(descOf(b, LANG))}</p>
     <div class="actions">
-      <a class="btn primary" href="books/${b.id}.epub" download>Download <span class="size">· ${fmt(b.kb)}</span></a>
-      <button class="btn ghost" data-share="${b.id}" title="Copy a link to this book" aria-label="Copy link to ${esc(b.title)}">Link</button>
+      <a class="btn primary" href="books/${b.id}.epub" download>${t.download} <span class="size">· ${fmt(b.kb)}</span></a>
+      <button class="btn ghost" data-share="${b.id}" title="${esc(t.copyTitle)}" aria-label="${esc(t.copyAria(b.title))}">${t.link}</button>
     </div>
   </article>`).join('');
+  if (typeof fitTagline === "function") fitTagline();
+}
+document.querySelectorAll('.lang-toggle button').forEach(b => b.addEventListener('click', () => {
+  LANG = b.dataset.lang; try { localStorage.setItem("lib:lang", LANG); } catch {} render();
+}));
+render();
 
 function show(msg){ toast.textContent = msg; toast.classList.add('show'); clearTimeout(show.t); show.t = setTimeout(()=>toast.classList.remove('show'), 1800); }
-
-
 
 document.querySelector('main').addEventListener('click', async e => {
   const b = e.target.closest('[data-share]'); if(!b) return;
   const url = location.origin + location.pathname.replace(/index\.html$/,'') + b.dataset.share + '/';
-  try { await navigator.clipboard.writeText(url); show('Link copied'); }
-  catch { prompt('Copy this link:', url); }
+  try { await navigator.clipboard.writeText(url); show(T[LANG].copied); }
+  catch { prompt(T[LANG].copyPrompt, url); }
 });
 
 // Old-style links (…/ebooks/#wise-up) go straight to that book's own page.
