@@ -151,6 +151,7 @@ footer a{{color:inherit}}
   <div class="seal"><a href="https://executiveclass.ca" aria-label="Executive Class: executiveclass.ca"><img src="../covers/executiveclass-logo.png?v={v}" alt="Executive Class logo" width="110" height="110"></a><a class="sitelink" href="https://executiveclass.ca">executiveclass.ca</a></div>
   <footer><span>© Ron Taylor</span><a href="../">{more}</a></footer>
 </main>
+<script data-goatcounter="https://executiveclass.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
 """
