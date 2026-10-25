@@ -42,9 +42,9 @@ HELP = {
 # OPENING is the first sentence, written for each book. CTA_REST is shared by every book in that language.
 CTA_URL = "https://executiveclass.ca/#cursos"
 CTA_REST = {
- "en": ("If you want to take your English further, explore Executive Class, Ron Taylor's individual coaching for Brazilian professionals.",
+ "en": ("If you want to take your English further, explore Executive Class, Ron Taylor's private English consulting practice for Brazilian professionals.",
         "Explore Executive Class →"),
- "pt": ("Se você quer levar o seu inglês mais longe, conheça a Executive Class, o coaching individual de Ron Taylor para profissionais brasileiros.",
+ "pt": ("Se você quer levar o seu inglês mais longe, conheça a Executive Class, a consultoria privada de inglês de Ron Taylor para profissionais brasileiros.",
         "Conheça a Executive Class →"),
 }
 # The OPENING sentence in the other language (shown when the reader switches PT/EN).
@@ -102,7 +102,7 @@ OPENING = {
 SOCIAL = {
  "the-brazilian-edge": dict(
    title="The Brazilian Edge · Livro gratuito de Ron Taylor",
-   desc="The Brazilian Edge é um material gratuito para profissionais brasileiros que se preparam para construir o seu futuro no Canadá. A Executive Class oferece coaching individual de inglês para um número limitado de profissionais que querem se comunicar com mais confiança e impacto.",
+   desc="The Brazilian Edge é um material gratuito para profissionais brasileiros que se preparam para construir o seu futuro no Canadá. A Executive Class oferece consultoria privada de inglês para um número limitado de profissionais que querem se comunicar com mais confiança e impacto.",
    locale="pt_BR", alt="The Brazilian Edge, livro gratuito de Ron Taylor", wide_preview=True),
 }
 
