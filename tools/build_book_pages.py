@@ -20,7 +20,9 @@ V = h.hexdigest()[:8]
 src = re.sub(r'const V = "[^"]*";', f'const V = "{V}";', src)
 open("index.html", "w", encoding="utf-8").write(src)
 
-LABEL = {"en": "English", "pt": "Português"}
+# Every page shows Portuguese by default, with a PT | EN switch (the choice is shared with the library page).
+LABEL = {"pt": {"en": "Livro em inglês", "pt": "Livro em português"}, "en": {"en": "Book in English", "pt": "Book in Portuguese"}}
+TAGLINE = {"pt": "Invista no seu sucesso", "en": "Invest in your success"}
 HELP = {
  "en": ("Need help opening the book?", [
    ("iPhone or iPad", "Tap <em>Download</em>, then tap <em>Open in Books</em>. If you don't see that, tap the Share button and choose <em>Books</em>."),
@@ -45,6 +47,35 @@ CTA_REST = {
  "pt": ("Se você quer levar o seu inglês mais longe, conheça a Executive Class, o coaching individual de Ron Taylor para profissionais brasileiros.",
         "Conheça a Executive Class →"),
 }
+# The OPENING sentence in the other language (shown when the reader switches PT/EN).
+OPENING_ALT = {
+ "evolving": "Você é mais do que o rótulo com que chegou. Descubra quem você pode se tornar e surfe a onda da mudança com confiança.",
+ "the-brazilian-edge": "Você já conquistou muita coisa. Agora, aprenda a reconhecer os pontos fortes, a experiência e a perspectiva que você traz para o Canadá, e a comunicá-los com confiança.",
+ "the-first-90-days": "Os seus três primeiros meses definem o tom da sua carreira no Canadá. Aprenda as regras não escritas e use-as com confiança.",
+ "the-canadian-networking-code": "Your experience already has value. Now, learn to turn it into opportunities in Canada—and to talk about it with confidence.",
+ "the-brazucan-pathway": "Building a new life takes courage, and you have already taken the first step. Now, move forward with clarity and confidence.",
+ "comece-com-tudo": "You are already preparing for a big step. Now, arrive at university ready to take part with confidence in English.",
+ "52-hours-to-a-winning-interview": "Toda entrevista é uma chance de mostrar quem você é. Aprenda a contar a sua história com clareza e a dar respostas que as pessoas lembram.",
+ "why-you-the-art-of-the-interview": "Toda entrevista faz a mesma pergunta: por que você? Aprenda a conhecer o seu valor, a comprová-lo e a comunicá-lo com confiança.",
+ "blue-ocean": "As melhores estratégias não lutam contra a concorrência: elas a tornam irrelevante. Aprenda a pensar assim e a discutir essas ideias com confiança em inglês.",
+ "remarkable-canadians": "As pessoas destas páginas ajudaram a construir o país que agora é a sua casa. Conheça as histórias delas e fale sobre o Canadá com confiança.",
+ "first-principles": "Grandes ideias nascem quando alguém questiona o que todos os outros aceitam. Aprenda a pensar diferente e a expressar o seu raciocínio com confiança.",
+ "wise-up": "Todo grande fracasso traz uma lição para quem está disposto a aprendê-la. Aprenda com as decisões mais difíceis da história e discuta-as com confiança.",
+ "natures-business-model": "A natureza resolve problemas difíceis há milhões de anos. Aprenda os princípios dela e leve-os para o seu trabalho com confiança.",
+ "the-intimacies-of-ritual": "Toda cultura responde às mesmas perguntas humanas do seu próprio jeito. Aprenda a ver o mundo por meio de outros costumes e a falar sobre eles com confiança.",
+ "crisis-management": "Toda crise é também um ponto de virada. Aprenda como pessoas e organizações transformaram colapso em avanço, e discuta isso com confiança.",
+ "shadows-in-the-cave": "Os grandes pensadores nos deixaram ferramentas para enxergar com clareza. Aprenda a usá-las no seu trabalho e a explicar o seu raciocínio com confiança.",
+ "humanities-business-school": "A filosofia e a literatura ainda têm muito a ensinar a uma carreira. Aprenda essas lições e leve-as para o seu trabalho com confiança.",
+ "masterclass": "Um inglês forte se constrói uma palavra, um som e um exercício de cada vez. Continue construindo e fale com confiança.",
+}
+# Book descriptions in the other language come from the DESC table in index.html.
+DESC_ALT = {}
+_dm = re.search(r"const DESC = \{(.*?)\n\};", src, re.S)
+if _dm:
+    for _lang, _body in re.findall(r'(pt|en): \{(.*?)\n  \}', _dm.group(1), re.S):
+        for _id, _t in re.findall(r'"([^"]+)": "((?:[^"\\]|\\.)*)"', _body):
+            DESC_ALT[(_id, _lang)] = _t
+
 OPENING = {
  "evolving": "You are more than the label you arrived with. Discover who you could become—and ride the wave of change with confidence.",
  "the-brazilian-edge": "You have already achieved a great deal. Now, learn to recognize the strengths, experience and perspective you bring to Canada—and communicate them with confidence.",
@@ -76,7 +107,7 @@ SOCIAL = {
 }
 
 TPL = """<!doctype html>
-<html lang="{htmllang}">
+<html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -121,6 +152,11 @@ section.help summary{{cursor:pointer;color:var(--muted);font-size:15px;padding:8
 .step{{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px}}
 .step b{{display:block;margin-bottom:4px}}
 .step p{{margin:0;color:var(--muted);font-size:14px}}
+html:not(.en) [data-l="en"],html.en [data-l="pt"]{{display:none !important}}
+.lang-toggle{{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--paper);align-self:center}}
+.lang-toggle button{{border:0;background:none;color:var(--muted);font:600 12px/1 Inter,sans-serif;letter-spacing:.12em;padding:9px 14px;min-width:44px;min-height:36px;cursor:pointer}}
+.lang-toggle button[aria-pressed="true"]{{background:var(--ink);color:var(--bg)}}
+.lang-toggle button:focus-visible{{outline:2px solid var(--focus);outline-offset:-2px}}
 .seal{{text-align:center;padding:56px 0 26px}}.seal a{{display:inline-block;border-radius:50%;box-shadow:0 10px 24px -14px rgba(0,0,0,.6)}}.seal img{{display:block;width:110px;height:110px}}.seal .sitelink{{display:block;margin-top:12px;font-family:Fraunces,Georgia,serif;font-weight:600;font-size:18px;color:var(--gold-title);text-decoration:none;box-shadow:none;border-radius:0}}
 footer{{color:var(--muted);font-size:11px;padding:0 0 40px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}}
 footer a{{color:inherit}}
@@ -129,9 +165,10 @@ footer a{{color:inherit}}
 .book.wide .cover{{aspect-ratio:16/9;background:#000;max-width:none}}
 @media (max-width:640px){{.book{{grid-template-columns:1fr;gap:28px;padding:32px 0 28px}}.cover{{max-width:240px;margin:0 auto}}.btn{{width:100%;justify-content:center}}}}
 </style>
+<script>try{{var q=new URLSearchParams(location.search).get("lang");var l=(q==="en"||q==="pt")?q:localStorage.getItem("lib:lang");if(l==="en"){{document.documentElement.classList.add("en");document.documentElement.lang="en";}}}}catch(e){{}}</script>
 </head>
 <body>
-<header><div class="wrap"><a href="https://executiveclass.ca">executiveclass.ca</a><span>Invest in your success</span></div></header>
+<header><div class="wrap"><a href="https://executiveclass.ca">executiveclass.ca</a><span>{tagline}</span><div class="lang-toggle" role="group" aria-label="Idioma / Language"><button type="button" data-lang="pt" aria-pressed="true">PT</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div></div></header>
 <main class="wrap">
   <article class="book{wideclass}">
     <div class="cover"><img src="../covers/{coverfile}?v={v}" alt="Cover of {title}"></div>
@@ -139,7 +176,7 @@ footer a{{color:inherit}}
       <span class="lang">{langlabel}</span>
       <h1>{title}</h1>
       <p class="by">Ron Taylor</p>
-      <p class="desc">{desc}</p>
+      <p class="desc">{descbody}</p>
       <a class="btn" href="../books/{id}.epub" download>{dl}</a>
       <span class="meta">EPUB · {size}</span>
 {cta}    </div>
@@ -151,14 +188,23 @@ footer a{{color:inherit}}
   <div class="seal"><a href="https://executiveclass.ca" aria-label="Executive Class: executiveclass.ca"><img src="../covers/executiveclass-logo.png?v={v}" alt="Executive Class logo" width="110" height="110"></a><a class="sitelink" href="https://executiveclass.ca">executiveclass.ca</a></div>
   <footer><span>© Ron Taylor</span><a href="../">{more}</a></footer>
 </main>
+<script>
+(function(){{var h=document.documentElement,bs=document.querySelectorAll(".lang-toggle button");
+function set(l){{h.classList.toggle("en",l==="en");h.lang=l==="en"?"en":"pt-BR";bs.forEach(function(b){{b.setAttribute("aria-pressed",String(b.dataset.lang===l));}});}}
+set(h.classList.contains("en")?"en":"pt");
+bs.forEach(function(b){{b.addEventListener("click",function(){{set(b.dataset.lang);try{{localStorage.setItem("lib:lang",b.dataset.lang);}}catch(e){{}}}});}});}})();
+</script>
 <script data-goatcounter="https://executiveclass.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
 """
 
 for b in books:
-    ht, steps, dl, more = HELP[b["lang"]]
     e = lambda s: html.escape(s, quote=True)
+    both = lambda pt, en: f'<span data-l="pt">{pt}</span><span data-l="en">{en}</span>'
+    other = "en" if b["lang"] == "pt" else "pt"
+    def by_lang(native, alt):   # (pt, en) pair from the book's own text and its translation
+        return (native, alt) if b["lang"] == "pt" else (alt, native)
     size = f'{b["kb"]/1024:.1f} MB' if b["kb"] >= 1000 else f'{b["kb"]} KB'
     soc = SOCIAL.get(b["id"], {})
     has_wide = os.path.exists(f"covers/{b['id']}-wide.jpg")
@@ -174,16 +220,21 @@ for b in books:
                       + '<meta name="twitter:card" content="summary_large_image">\n')
     cta = ""
     if b["id"] in OPENING:
-        rest, btn = CTA_REST[b["lang"]]
-        cta = (f'      <aside class="cta">\n        <p class="lead">{e(OPENING[b["id"]])}</p>\n'
-               f'        <p class="sub">{e(rest)}</p>\n        <a href="{CTA_URL}">{btn}</a>\n      </aside>\n')
+        op_pt, op_en = by_lang(OPENING[b["id"]], OPENING_ALT.get(b["id"], OPENING[b["id"]]))
+        cta = (f'      <aside class="cta">\n        <p class="lead">{both(e(op_pt), e(op_en))}</p>\n'
+               f'        <p class="sub">{both(e(CTA_REST["pt"][0]), e(CTA_REST["en"][0]))}</p>\n'
+               f'        <a href="{CTA_URL}">{both(CTA_REST["pt"][1], CTA_REST["en"][1])}</a>\n      </aside>\n')
+    d_pt, d_en = by_lang(b["desc"], DESC_ALT.get((b["id"], other), b["desc"]))
+    stepsof = lambda L: "".join(f'<div class="step"><b>{t}</b><p>{p}</p></div>' for t, p in HELP[L][1])
     page = TPL.format(v=V, site=SITE, id=b["id"], wideclass=" wide" if wide else "",
         coverfile=coverfile, ogimage=ogimage, ogextra=ogextra, ogimgextra=ogimgextra, cta=cta,
         ogtitle=e(soc.get("title", b["title"])), ogdesc=e(soc.get("desc", b["desc"])),
         title=e(b["title"]), desc=e(b["desc"]),
-        htmllang="pt-BR" if b["lang"] == "pt" else "en", langlabel=LABEL[b["lang"]],
-        dl=dl, size=size, helptitle=ht, more=more,
-        steps="".join(f'<div class="step"><b>{t}</b><p>{p}</p></div>' for t, p in steps))
+        langlabel=both(LABEL["pt"][b["lang"]], LABEL["en"][b["lang"]]), tagline=both(TAGLINE["pt"], TAGLINE["en"]),
+        descbody=both(e(d_pt), e(d_en)),
+        dl=both(HELP["pt"][2], HELP["en"][2]), size=size, helptitle=both(HELP["pt"][0], HELP["en"][0]),
+        more=both(HELP["pt"][3], HELP["en"][3]),
+        steps=f'<div data-l="pt" style="display:contents">{stepsof("pt")}</div><div data-l="en" style="display:contents">{stepsof("en")}</div>')
     os.makedirs(b["id"], exist_ok=True)
     open(os.path.join(b["id"], "index.html"), "w", encoding="utf-8").write(page)
     print("built", b["id"] + "/")
