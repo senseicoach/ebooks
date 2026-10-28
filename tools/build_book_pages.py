@@ -49,6 +49,7 @@ CTA_REST = {
 }
 # The OPENING sentence in the other language (shown when the reader switches PT/EN).
 OPENING_ALT = {
+ "the-psychology-of-going-beyond": "Muitos dos limites que você respeita nunca foram testados. Descubra quais barreiras você pode mudar e avance além delas com confiança.",
  "evolving": "Você é mais do que o rótulo com que chegou. Descubra quem você pode se tornar e surfe a onda da mudança com confiança.",
  "the-brazilian-edge": "Você já conquistou muita coisa. Agora, aprenda a reconhecer os pontos fortes, a experiência e a perspectiva que você traz para o Canadá, e a comunicá-los com confiança.",
  "the-first-90-days": "Os seus três primeiros meses definem o tom da sua carreira no Canadá. Aprenda as regras não escritas e use-as com confiança.",
@@ -77,6 +78,7 @@ if _dm:
             DESC_ALT[(_id, _lang)] = _t
 
 OPENING = {
+ "the-psychology-of-going-beyond": "Many of the limits you respect have never been tested. Discover which barriers you can change—and go beyond them with confidence.",
  "evolving": "You are more than the label you arrived with. Discover who you could become—and ride the wave of change with confidence.",
  "the-brazilian-edge": "You have already achieved a great deal. Now, learn to recognize the strengths, experience and perspective you bring to Canada—and communicate them with confidence.",
  "the-first-90-days": "Your first three months set the tone for your career in Canada. Learn the unwritten rules—and use them with confidence.",

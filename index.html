@@ -161,8 +161,10 @@ footer{color:var(--muted);font-size:13px;padding:0 0 40px}
 <script>
 // To add a book: put the .epub in /books and the cover in /covers (same name), then add a line here.
 // Changes whenever a cover changes, so browsers fetch the new image instead of an old saved copy.
-const V = "e50a9714";
+const V = "24bdfaee";
 const BOOKS = [
+  {id:"the-psychology-of-going-beyond", title:"The Psychology of Going Beyond", lang:"en", kb:495,
+   desc:"52 case studies in understanding yourself: how beliefs, fear, habits, judgement and other people shape what you attempt. Each case comes with an academic analysis, key terms and reflection questions for advanced English learners."},
   {id:"the-first-90-days", title:"The First 90 Days", lang:"en", kb:908,
    desc:"52 cases on passing probation in Canada: the unwritten rules, the phrases that work, and the reputation you build in your first three months. For Brazilian professionals in their first Canadian job."},
   {id:"the-brazilian-edge", title:"The Brazilian Edge", lang:"en", kb:989,
@@ -247,6 +249,7 @@ const T = {
 // Book descriptions in the other language. A book missing here shows its own description in both.
 const DESC = {
   pt: {
+    "the-psychology-of-going-beyond": "52 estudos de caso para entender a si mesmo: como crenças, medo, hábitos, julgamento e outras pessoas moldam o que você se permite tentar. Cada caso traz uma análise acadêmica, termos-chave e perguntas de reflexão para alunos avançados de inglês.",
     "the-first-90-days": "52 casos sobre como passar pelo período de experiência no Canadá: as regras não escritas, as frases que funcionam e a reputação que você constrói nos três primeiros meses. Para profissionais brasileiros no primeiro emprego no Canadá.",
     "the-brazilian-edge": "52 lições sobre o que você traz para o Canadá e como usar isso: um curso de autoanálise em inglês sobre o seu maior desafio, por que você teve sucesso, o que aprendeu sobre si mesmo e as qualidades de quem domina o inglês e a imigração.",
     "52-hours-to-a-winning-interview": "Cinquenta e dois casos, respostas fortes analisadas em detalhe e as palavras, os sons e os documentos que decidem uma entrevista. Para brasileiros construindo a carreira no Canadá.",
