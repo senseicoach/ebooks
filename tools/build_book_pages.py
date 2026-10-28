@@ -138,7 +138,7 @@ header span{{color:var(--gold-ink);font-size:12px;font-weight:600;letter-spacing
 .cover{{width:100%;aspect-ratio:2/3;border-radius:8px;overflow:hidden;box-shadow:0 2px 0 rgba(0,0,0,.05),0 24px 48px -20px rgba(0,0,0,.55)}}
 .cover img{{width:100%;height:100%;object-fit:cover;display:block}}
 .lang{{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-ink)}}
-h1{{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.08;margin:10px 0 6px;letter-spacing:-.01em}}
+h1{{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.08;margin:10px 0 22px;letter-spacing:-.01em}}
 .by{{color:var(--muted);margin:0 0 22px}}
 .desc{{font-size:18px;margin:0 0 30px;max-width:52ch}}
 .btn{{display:inline-flex;align-items:center;gap:10px;text-decoration:none;border-radius:10px;padding:14px 26px;font:600 16px Inter,sans-serif;background:var(--navy);color:#f3eee3}}
@@ -174,7 +174,6 @@ footer a{{color:inherit}}
     <div class="cover"><img src="../covers/{coverfile}?v={v}" alt="Cover of {title}"></div>
     <div>
       <h1>{title}</h1>
-      <p class="by">Ron Taylor</p>
       <p class="desc">{descbody}</p>
       <a class="btn" href="../books/{id}.epub" download>{dl}</a>
       <span class="meta">EPUB · {size}</span>
