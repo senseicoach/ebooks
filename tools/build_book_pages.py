@@ -131,7 +131,7 @@ TPL = """<!doctype html>
 body{{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}}
 .wrap{{max-width:960px;margin:0 auto;padding:0 20px}}
 header{{border-bottom:1px solid var(--line)}}
-header .wrap{{display:grid;grid-template-columns:minmax(0,320px) 1fr;gap:12px 48px;align-items:center;padding:22px 20px 18px}}header .wrap>a{{justify-self:center;text-align:center}}header .hright{{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px}}header .hright>.tag{{grid-column:2;text-align:center}}header .hright>.lang-toggle{{grid-column:3;justify-self:end}}@media (max-width:640px){{header .wrap{{grid-template-columns:1fr}}header .hright{{grid-template-columns:1fr auto}}header .hright>.tag{{grid-column:1;text-align:left}}header .hright>.lang-toggle{{grid-column:2}}}}
+header .wrap{{display:grid;grid-template-columns:minmax(0,320px) 1fr;gap:12px 48px;align-items:center;padding:22px 20px 18px}}header .wrap>a{{justify-self:center;text-align:center}}header .hright{{display:flex;justify-content:flex-end;align-items:center}}header .hright>.tag{{grid-column:2;text-align:center}}header .hright>.lang-toggle{{grid-column:3;justify-self:end}}@media (max-width:640px){{header .wrap{{grid-template-columns:1fr auto;gap:12px}}header .wrap>a{{justify-self:start}}}}
 header a{{color:var(--gold-title);text-decoration:none;font-family:Fraunces,Georgia,serif;font-weight:600;font-size:26px}}header a:hover{{text-decoration:underline}}
 header span{{color:var(--gold-ink);font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase}}
 .book{{display:grid;grid-template-columns:minmax(0,320px) 1fr;gap:48px;align-items:start;padding:56px 0 40px}}
@@ -168,12 +168,11 @@ footer a{{color:inherit}}
 <script>try{{var q=new URLSearchParams(location.search).get("lang");var l=(q==="en"||q==="pt")?q:localStorage.getItem("lib:lang");if(l==="en"){{document.documentElement.classList.add("en");document.documentElement.lang="en";}}}}catch(e){{}}</script>
 </head>
 <body>
-<header><div class="wrap"><a href="https://executiveclass.ca">executiveclass.ca</a><div class="hright"><span class="tag">{tagline}</span><div class="lang-toggle" role="group" aria-label="Idioma / Language"><button type="button" data-lang="pt" aria-pressed="true">PT</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div></div></div></header>
+<header><div class="wrap"><a href="https://executiveclass.ca">executiveclass.ca</a><div class="hright"><div class="lang-toggle" role="group" aria-label="Idioma / Language"><button type="button" data-lang="pt" aria-pressed="true">PT</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div></div></div></header>
 <main class="wrap">
   <article class="book{wideclass}">
     <div class="cover"><img src="../covers/{coverfile}?v={v}" alt="Cover of {title}"></div>
     <div>
-      <span class="lang">{langlabel}</span>
       <h1>{title}</h1>
       <p class="by">Ron Taylor</p>
       <p class="desc">{descbody}</p>
