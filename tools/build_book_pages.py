@@ -13,6 +13,14 @@ for m in re.finditer(r"\{(.*?)\}", block, re.S):
     books.append(dict(id=get("id"), title=get("title"), lang=get("lang"), desc=get("desc"),
                       kb=int(re.search(r"kb:(\d+)", body).group(1))))
 
+# Keep the sizes shown on the buttons in step with the real files (books/<id>.epub and books/<id>.pdf).
+def _kb(path): return max(1, round(os.path.getsize(path) / 1024))
+for b in books:
+    b["kb"] = _kb(f"books/{b['id']}.epub")
+    b["pkb"] = _kb(f"books/{b['id']}.pdf") if os.path.exists(f"books/{b['id']}.pdf") else 0
+    entry = re.search(r'\{id:"%s".*?kb:\d+,?( pkb:\d+,)?' % re.escape(b["id"]), src, re.S)
+    src = src[:entry.start()] + re.sub(r'kb:\d+,?( pkb:\d+,)?$', f'kb:{b["kb"]}, pkb:{b["pkb"]},', entry.group(0)) + src[entry.end():]
+
 # Cache-busting version: a short hash of all cover images.
 h = hashlib.sha1()
 for f in sorted(os.listdir("covers")): h.update(open(os.path.join("covers", f), "rb").read())
@@ -25,18 +33,22 @@ LABEL = {"pt": {"en": "Livro em inglês", "pt": "Livro em português"}, "en": {"
 TAGLINE = {"pt": "Invista no seu sucesso", "en": "Invest in your success"}
 HELP = {
  "en": ("Need help opening the book?", [
+   ("Not sure which to pick?", "Choose <em>PDF</em>. It opens on any phone or computer. Choose <em>EPUB</em> if you want a book that adjusts to your phone or e-reader screen. An EPUB will not open in Adobe Acrobat, which only reads PDF files."),
    ("iPhone or iPad", "Tap <em>Download</em>, then tap <em>Open in Books</em>. If you don't see that, tap the Share button and choose <em>Books</em>."),
    ("Mac", "Download the file, then double-click it in your Downloads folder. It opens in Apple Books."),
    ("Android or Windows", "Install a free EPUB reader such as Google Play Books (Android) or Thorium Reader (Windows), then open the downloaded file with it."),
    ("Kindle", "Go to amazon.com/sendtokindle, sign in and upload the .epub file. It appears on your Kindle in a few minutes.")],
    "Download the ebook", "More free resources"),
  "pt": ("Precisa de ajuda para abrir o livro?", [
+   ("Não sabe qual escolher?", "Escolha o <em>PDF</em>. Ele abre em qualquer celular ou computador. Escolha o <em>EPUB</em> se quiser um livro que se ajusta à tela do celular ou do e-reader. O EPUB não abre no Adobe Acrobat, que só lê arquivos PDF."),
    ("iPhone ou iPad", "Toque em <em>Baixar</em> e depois em <em>Abrir no Livros</em>. Se não aparecer, toque no botão Compartilhar e escolha <em>Livros</em>."),
    ("Mac", "Baixe o arquivo e clique duas vezes nele na pasta Downloads. Ele abre no Apple Books."),
    ("Android ou Windows", "Instale um leitor de EPUB gratuito, como o Google Play Livros (Android) ou o Thorium Reader (Windows), e abra o arquivo baixado."),
    ("Kindle", "Acesse amazon.com/sendtokindle, entre na sua conta e envie o arquivo .epub. Ele aparece no seu Kindle em poucos minutos.")],
    "Baixar o ebook", "Mais recursos gratuitos"),
 }
+
+DL = {"en": ("Download PDF", "Download EPUB"), "pt": ("Baixar PDF", "Baixar EPUB")}
 
 # Call to action shown under the download button.
 # OPENING is the first sentence, written for each book. CTA_REST is shared by every book in that language.
@@ -147,6 +159,9 @@ h1{{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:clamp(30px,5vw,
 .desc{{font-size:18px;margin:0 0 30px;max-width:52ch}}
 .btn{{display:inline-flex;align-items:center;gap:10px;text-decoration:none;border-radius:10px;padding:14px 26px;font:600 16px Inter,sans-serif;background:var(--navy);color:#f3eee3}}
 @media (prefers-color-scheme: dark){{.btn{{background:var(--gold);color:#14213a}}}}
+.btn.alt{{background:transparent;color:var(--navy);box-shadow:inset 0 0 0 2px var(--navy)}}
+@media (prefers-color-scheme: dark){{.btn.alt{{background:transparent;color:var(--gold);box-shadow:inset 0 0 0 2px var(--gold)}}}}
+.btns{{display:flex;gap:12px;flex-wrap:wrap}}
 .btn:focus-visible{{outline:2px solid var(--focus);outline-offset:3px}}
 .meta{{display:block;margin-top:10px;color:var(--muted);font-size:13px}}
 .cta{{margin:32px 0 0;padding:22px 24px;background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:12px;max-width:56ch}}.cta p{{margin:0 0 12px;font-size:16px}}.cta p.lead{{font-family:Fraunces,Georgia,serif;font-size:19px;line-height:1.4}}.cta p.sub{{color:var(--muted);font-size:15px;margin-bottom:16px}}.cta a{{display:inline-flex;align-items:center;text-decoration:none;border-radius:10px;padding:11px 20px;font:600 15px Inter,sans-serif;color:var(--gold-title);border:1px solid var(--gold)}}.cta a:hover{{background:var(--gold);color:#14213a}}.cta a:focus-visible{{outline:2px solid var(--focus);outline-offset:3px}}@media (max-width:640px){{.cta{{padding:18px}}.cta a{{width:100%;justify-content:center}}}}
@@ -179,8 +194,11 @@ footer a{{color:inherit}}
     <div>
       <h1>{title}</h1>
       <p class="desc">{descbody}</p>
-      <a class="btn" href="../books/{id}.epub" download>{dl}</a>
-      <span class="meta">EPUB · {size}</span>
+      <div class="btns">
+      <a class="btn" href="../books/{id}.pdf" download>{dlpdf}</a>
+      <a class="btn alt" href="../books/{id}.epub" download>{dlepub}</a>
+      </div>
+      <span class="meta">PDF · {psize} &nbsp;·&nbsp; EPUB · {size}</span>
 {cta}    </div>
   </article>
   <section class="help"><details>
@@ -208,6 +226,7 @@ for b in books:
     def by_lang(native, alt):   # (pt, en) pair from the book's own text and its translation
         return (native, alt) if b["lang"] == "pt" else (alt, native)
     size = f'{b["kb"]/1024:.1f} MB' if b["kb"] >= 1000 else f'{b["kb"]} KB'
+    psize = f'{b["pkb"]/1024:.1f} MB' if b["pkb"] >= 1000 else f'{b["pkb"]} KB'
     soc = SOCIAL.get(b["id"], {})
     has_wide = os.path.exists(f"covers/{b['id']}-wide.jpg")
     wide = has_wide and not soc.get("wide_preview")          # wide cover on the page itself
@@ -234,7 +253,7 @@ for b in books:
         title=e(b["title"]), desc=e(b["desc"]),
         langlabel=both(LABEL["pt"][b["lang"]], LABEL["en"][b["lang"]]), tagline=both(TAGLINE["pt"], TAGLINE["en"]),
         descbody=both(e(d_pt), e(d_en)),
-        dl=both(HELP["pt"][2], HELP["en"][2]), size=size, helptitle=both(HELP["pt"][0], HELP["en"][0]),
+        dlpdf=both(DL["pt"][0], DL["en"][0]), dlepub=both(DL["pt"][1], DL["en"][1]), size=size, psize=psize, helptitle=both(HELP["pt"][0], HELP["en"][0]),
         more=both(HELP["pt"][3], HELP["en"][3]),
         steps=f'<div data-l="pt" style="display:contents">{stepsof("pt")}</div><div data-l="en" style="display:contents">{stepsof("en")}</div>')
     os.makedirs(b["id"], exist_ok=True)

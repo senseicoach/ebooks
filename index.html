@@ -62,7 +62,8 @@ header.hero h1{display:inline-block;margin-bottom:4px}
 .feature .btn{padding:7px 14px;font-size:13px;border-radius:8px}
 .feature .btn.primary{background:var(--gold-title);color:#14140f}
 .feature .btn.ghost{border-color:#3a3934;color:#f3eee3}
-@media (max-width:820px){.feature{flex-wrap:wrap;gap:12px 14px;padding:16px}.feature .art img{height:72px}.feature h2{font-size:19px}.feature .actions{width:100%;flex-direction:row !important}.feature .btn.primary{flex:1}.feature .btn.ghost{flex:0 0 auto !important}}
+.feature .btn.alt{border-color:var(--gold-title);color:var(--gold-title)}
+@media (max-width:820px){.feature{flex-wrap:wrap;gap:12px 14px;padding:16px}.feature .art img{height:72px}.feature h2{font-size:19px}.feature .actions{width:100%;flex-direction:row !important}.feature .btn.primary{flex:1}.feature .btn.alt{flex:1}.feature .btn.ghost{flex:0 0 auto !important}}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:28px 24px;padding:16px 0 48px}
 .book{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px 14px 16px;display:flex;flex-direction:column;transition:box-shadow .2s, transform .2s;scroll-margin-top:24px}
 .book:hover{box-shadow:0 10px 30px -12px rgba(20,33,58,.35);transform:translateY(-2px)}
@@ -77,8 +78,13 @@ header.hero h1{display:inline-block;margin-bottom:4px}
 .btn.primary{background:var(--navy);color:#f3eee3}
 @media (prefers-color-scheme: dark){ .btn.primary{background:var(--gold);color:#14213a} }
 .btn.ghost{flex:0 0 auto;background:transparent;border-color:var(--line);color:var(--ink)}
+.btn.alt{background:transparent;border-color:var(--navy);color:var(--navy)}
+@media (prefers-color-scheme: dark){ .btn.alt{border-color:var(--gold);color:var(--gold)} }
+.fmtnote{margin:0 0 18px;color:var(--muted,#6b675d);font-size:13px;text-align:center}
 .btn:focus-visible,.chip:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
 .size{font-weight:400;opacity:.75}
+.book .size{display:none}
+.btn{white-space:nowrap}
 
 section.labs{border-top:1px solid var(--line);padding:44px 0 8px}
 section.labs h2{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:clamp(26px,3.4vw,34px);margin:0 0 8px}
@@ -134,6 +140,7 @@ footer{color:var(--muted);font-size:13px;padding:0 0 40px}
 <main class="wrap">
   <section class="feature" id="feature"></section>
   <div class="spacer" aria-hidden="true"></div>
+  <p class="fmtnote" data-t="fmt"></p>
   <div class="grid" id="grid"></div>
   <section class="labs" id="labs" aria-labelledby="labs-h">
     <h2 id="labs-h">Listening Labs</h2>
@@ -163,45 +170,45 @@ footer{color:var(--muted);font-size:13px;padding:0 0 40px}
 // Changes whenever a cover changes, so browsers fetch the new image instead of an old saved copy.
 const V = "725c273d";
 const BOOKS = [
-  {id:"the-psychology-of-going-beyond", title:"The Psychology of Going Beyond", lang:"en", kb:495,
+  {id:"the-psychology-of-going-beyond", title:"The Psychology of Going Beyond", lang:"en", kb:495, pkb:527,
    desc:"52 case studies in understanding yourself: how beliefs, fear, habits, judgement and other people shape what you attempt. Each case comes with an academic analysis, key terms and reflection questions for advanced English learners."},
-  {id:"the-first-90-days", title:"Your First 90 Days in Canada", lang:"en", kb:966,
+  {id:"the-first-90-days", title:"Your First 90 Days in Canada", lang:"en", kb:965, pkb:487,
    desc:"52 cases on passing probation in Canada: the unwritten rules, the phrases that work, and the reputation you build in your first three months. For Brazilian professionals in their first Canadian job."},
-  {id:"the-brazilian-edge", title:"The Brazilian Edge", lang:"en", kb:989,
+  {id:"the-brazilian-edge", title:"The Brazilian Edge", lang:"en", kb:989, pkb:852,
    desc:"52 lessons on what you bring to Canada, and how to use it: a self-analysis course in English on your biggest challenge, why you have succeeded, what you have learned about yourself, and the traits that master English and immigration."},
-  {id:"the-canadian-networking-code", title:"The Canadian Networking Code", lang:"pt", kb:972,
+  {id:"the-canadian-networking-code", title:"The Canadian Networking Code", lang:"pt", kb:972, pkb:677,
    desc:"Como profissionais brasileiros transformam experiência em oportunidade no Canadá. Inclui 100 scripts práticos e um plano de 30/60/90 dias."},
-  {id:"the-brazucan-pathway", title:"The Brazucan Pathway", lang:"pt", kb:910,
+  {id:"the-brazucan-pathway", title:"The Brazucan Pathway", lang:"pt", kb:910, pkb:543,
    desc:"Um GPS psicológico para construir a sua vida no Canadá: do choque de status ao luto à distância, à reconstrução profissional e ao pertencimento."},
-  {id:"comece-com-tudo", title:"Comece com Tudo", lang:"pt", kb:862,
+  {id:"comece-com-tudo", title:"Comece com Tudo", lang:"pt", kb:862, pkb:576,
    desc:"Guia bilíngue de preparação para a universidade no Canadá: explicações em português, modelos em inglês."},
-  {id:"52-hours-to-a-winning-interview", title:"52 Hours to a Winning Interview", lang:"en", kb:1108,
+  {id:"52-hours-to-a-winning-interview", title:"52 Hours to a Winning Interview", lang:"en", kb:1108, pkb:562,
    desc:"Fifty-two cases, strong answers taken apart, and the words, sounds and documents that decide an interview. For Brazilians building careers in Canada."},
-  {id:"why-you-the-art-of-the-interview", title:"Why You? The Art of the Interview", lang:"en", kb:1026,
+  {id:"why-you-the-art-of-the-interview", title:"Why You? The Art of the Interview", lang:"en", kb:1026, pkb:766,
    desc:"Every interview question is the same question in a different costume. Know your value, prove it, communicate it."},
-  {id:"the-art-of-speaking-confidently", title:"The Art of Speaking Confidently", lang:"en", kb:388,
+  {id:"the-art-of-speaking-confidently", title:"The Art of Speaking Confidently", lang:"en", kb:387, pkb:451,
    desc:"200 situations at work and in everyday life, each with a passive, an aggressive and an assertive response: the words to say what you mean, clearly and respectfully."},
-  {id:"blue-ocean", title:"Blue Ocean: 52 Case Studies in Uncontested Market Strategy", lang:"en", kb:1032,
+  {id:"blue-ocean", title:"Blue Ocean: 52 Case Studies in Uncontested Market Strategy", lang:"en", kb:1032, pkb:911,
    desc:"From Cirque du Soleil and Southwest Airlines to Nubank and Havaianas, each case unpacked with the Eliminate-Reduce-Raise-Create grid, vocabulary, practice tasks and an answer key."},
-  {id:"remarkable-canadians", title:"Remarkable Canadians: 52 Lives That Shaped a Nation", lang:"en", kb:1062,
+  {id:"remarkable-canadians", title:"Remarkable Canadians: 52 Lives That Shaped a Nation", lang:"en", kb:1062, pkb:856,
    desc:"Fifty-two profiles of significant Canadians, a citizenship practice quiz, and one final profile: yours."},
-  {id:"first-principles", title:"First Principles", lang:"en", kb:1044,
+  {id:"first-principles", title:"First Principles", lang:"en", kb:1044, pkb:1043,
    desc:"52 stories about thinking differently: a reading and critical-thinking course for advanced ESL and Business English learners."},
-  {id:"wise-up", title:"Wise Up", lang:"en", kb:1265,
+  {id:"wise-up", title:"Wise Up", lang:"en", kb:1265, pkb:1302,
    desc:"Decisions that made history: fifty-two case studies in disaster, decision-making, organizational collapse and recovery."},
-  {id:"natures-business-model", title:"Nature's Business Model", lang:"en", kb:1118,
+  {id:"natures-business-model", title:"Nature's Business Model", lang:"en", kb:1118, pkb:1056,
    desc:"52 principles from nature for building better organizations: short case studies tracing mechanisms in the natural world into working principles."},
-  {id:"the-intimacies-of-ritual", title:"The Intimacies of Ritual", lang:"en", kb:945,
+  {id:"the-intimacies-of-ritual", title:"The Intimacies of Ritual", lang:"en", kb:945, pkb:795,
    desc:"52 customs from around the world, arranged not by geography but by the human questions they answer."},
-  {id:"crisis-management", title:"Crisis Management: 52 Case Studies in Turning Breakdown into Breakthrough", lang:"en", kb:1214,
+  {id:"crisis-management", title:"Crisis Management: 52 Case Studies in Turning Breakdown into Breakthrough", lang:"en", kb:1214, pkb:989,
    desc:"Corporate pivots, PR and cyber-security recoveries, brand re-imagination and personal reinvention: fifty-two case studies organized into six parts."},
-  {id:"shadows-in-the-cave", title:"Shadows in the Cave: 52 Thinking Tools for Navigating Your World", lang:"en", kb:1035,
+  {id:"shadows-in-the-cave", title:"Shadows in the Cave: 52 Thinking Tools for Navigating Your World", lang:"en", kb:1035, pkb:1039,
    desc:"Fifty-two classic thought experiments, from Plato's Cave to Asimov's Last Question, each with a real-world professional application, vocabulary and discussion practice."},
-  {id:"evolving", title:"Evolving: Riding the AI Wave into the Singularity", lang:"en", kb:752,
+  {id:"evolving", title:"Evolving: Riding the AI Wave into the Singularity", lang:"en", kb:752, pkb:631,
    desc:"Fourteen chapters on who you could become when your world changes, from emigration to AI: question the label, discover strengths you overlooked and keep growing, while staying responsible for your own thinking and choices."},
-  {id:"humanities-business-school", title:"The Humanities Business School", lang:"en", kb:978,
+  {id:"humanities-business-school", title:"The Humanities Business School", lang:"en", kb:978, pkb:1014,
    desc:"52 lessons from philosophy, literature and social thought: what great thinkers and writers still have to teach a working career."},
-  {id:"masterclass", featured:true, title:"Executive Class", lang:"en", kb:3351,
+  {id:"masterclass", featured:true, title:"Executive Class", lang:"en", kb:3351, pkb:4645,
    desc:"The core textbook of every Executive Class course: more than 150 vocabulary subjects, pronunciation practice and exercises, in about 1,100 pages."},
 ];
 
@@ -215,6 +222,7 @@ const T = {
     title: "Biblioteca gratuita · Executive Class",
     tagline: "Invista no seu sucesso",
     langName: {en:"Inglês", pt:"Português"},
+    fmt: "PDF abre em qualquer celular ou computador. EPUB se ajusta à tela do celular ou do e-reader (não abre no Adobe Acrobat).",
     download: "Baixar", link: "Link", copyTitle: "Copiar o link deste livro",
     copyAria: t => "Copiar o link de " + t, cover: t => "Capa de " + t,
     copied: "Link copiado", copyPrompt: "Copie este link:",
@@ -233,6 +241,7 @@ const T = {
     title: "Free library · Executive Class",
     tagline: "Invest in your success",
     langName: {en:"English", pt:"Portuguese"},
+    fmt: "PDF opens on any phone or computer. EPUB adjusts to your phone or e-reader screen (it will not open in Adobe Acrobat).",
     download: "Download", link: "Link", copyTitle: "Copy a link to this book",
     copyAria: t => "Copy link to " + t, cover: t => "Cover of " + t,
     copied: "Link copied", copyPrompt: "Copy this link:",
@@ -294,7 +303,8 @@ function render(){
     <p>${esc(descOf(b, LANG))}</p>
   </div>
   <div class="actions">
-    <a class="btn primary" href="books/${b.id}.epub" download>${t.download} <span class="size">· ${fmt(b.kb)}</span></a>
+    <a class="btn primary" href="books/${b.id}.pdf" download title="${t.download} PDF · ${fmt(b.pkb)}">PDF <span class="size">· ${fmt(b.pkb)}</span></a>
+    <a class="btn alt" href="books/${b.id}.epub" download title="${t.download} EPUB · ${fmt(b.kb)}">EPUB <span class="size">· ${fmt(b.kb)}</span></a>
     <button class="btn ghost" data-share="${b.id}" aria-label="${esc(t.copyAria(b.title))}">${t.link}</button>
   </div>`; }
   grid.innerHTML = BOOKS.filter(b => !b.featured).map(b => `
@@ -304,7 +314,8 @@ function render(){
     <h2><a href="${b.id}/">${esc(b.title)}</a></h2>
     <p>${esc(descOf(b, LANG))}</p>
     <div class="actions">
-      <a class="btn primary" href="books/${b.id}.epub" download>${t.download} <span class="size">· ${fmt(b.kb)}</span></a>
+      <a class="btn primary" href="books/${b.id}.pdf" download title="${t.download} PDF · ${fmt(b.pkb)}">PDF <span class="size">· ${fmt(b.pkb)}</span></a>
+    <a class="btn alt" href="books/${b.id}.epub" download title="${t.download} EPUB · ${fmt(b.kb)}">EPUB <span class="size">· ${fmt(b.kb)}</span></a>
       <button class="btn ghost" data-share="${b.id}" title="${esc(t.copyTitle)}" aria-label="${esc(t.copyAria(b.title))}">${t.link}</button>
     </div>
   </article>`).join('');
