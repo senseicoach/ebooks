@@ -11,6 +11,7 @@
 <meta property="og:description" content="Livros digitais e Listening Labs gratuitos para profissionais brasileiros que estão construindo o futuro no Canadá.">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:url" content="https://executiveclass.ca/ebooks/">
+<link rel="canonical" href="https://executiveclass.ca/ebooks/">
 <meta property="og:image" content="https://executiveclass.ca/ebooks/covers/library-wide.jpg">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
@@ -42,6 +43,7 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:clamp(34px,5vw,5
 a.site{color:var(--gold-title);text-decoration:none}a.site:hover{text-decoration:underline}
 .lede{margin:0;color:var(--gold-ink);font-size:15px;font-weight:600;text-transform:uppercase;white-space:nowrap;display:inline-block}
 header.hero h1{display:inline-block;margin-bottom:4px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
 .spacer{height:72px}
 .bar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:28px 0 8px}
 .filters{display:flex;gap:6px;flex-wrap:wrap}
@@ -132,7 +134,7 @@ footer{color:var(--muted);font-size:13px;padding:0 0 40px}
 <div class="wrap langbar"><div class="lang-toggle" role="group" aria-label="Idioma / Language"><button type="button" data-lang="pt" aria-pressed="true">PT</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div></div>
 <header class="hero">
   <div class="wrap">
-    <h1 id="brand"><a class="site" href="https://executiveclass.ca">executiveclass.ca</a></h1><br>
+    <h1 id="brand"><a class="site" href="https://executiveclass.ca">executiveclass.ca</a><span class="vh" data-t="h1x"> · Biblioteca gratuita</span></h1><br>
     <p class="lede" id="tagline" data-t="tagline">Invista no seu sucesso</p>
   </div>
 </header>
@@ -148,7 +150,7 @@ footer{color:var(--muted);font-size:13px;padding:0 0 40px}
     <p class="labs-steps" data-t="labsSteps" data-html>Ready to work with me? <a href="https://executiveclass.ca/#aplicar">Book your Preboarding Assessment →</a></p>
     <div class="lab-grid">
       <a class="lab" href="https://executiveclass.ca/listening-lab/" target="_blank" rel="noopener"><small data-t="lab_listening_n">100 scripts</small><b>Listening Lab</b><span data-t="lab_listening_d">Everyday life in Canada: the bank, the doctor, school, work and the neighbours.</span><em data-t="lab_listening_o">Open the lab →</em></a>
-      <a class="lab" href="https://executiveclass.ca/interview-lab/" target="_blank" rel="noopener"><small data-t="lab_interview_n">76 scripts</small><b>Interview Lab</b><span data-t="lab_interview_d">Real job-interview answers, from the first question to the last.</span><em data-t="lab_interview_o">Open the lab →</em></a>
+      <a class="lab" href="https://executiveclass.ca/interview-lab/" target="_blank" rel="noopener"><small data-t="lab_interview_n">76 scripts</small><b>Interview Lab</b><span data-t="lab_interview_d">Model job-interview answers, from the first question to the last.</span><em data-t="lab_interview_o">Open the lab →</em></a>
       <a class="lab" href="https://executiveclass.ca/OFFICE-LAB/" target="_blank" rel="noopener"><small data-t="lab_office_n">87 scripts</small><b>Office Listening Lab</b><span data-t="lab_office_d">Your first year at work: meetings, feedback, phone calls and your manager.</span><em data-t="lab_office_o">Open the lab →</em></a>
       <a class="lab" href="https://executiveclass.ca/NETWORKING-LAB/" target="_blank" rel="noopener"><small data-t="lab_networking_n">95 scripts</small><b>Networking Listening Lab</b><span data-t="lab_networking_d">Coffee chats, events, recruiters and phone calls that open doors.</span><em data-t="lab_networking_o">Open the lab →</em></a>
       <a class="lab" href="https://executiveclass.ca/UNIVERSITY-LISTENING-LAB/" target="_blank" rel="noopener"><small data-t="lab_university_n">87 scripts</small><b>University Listening Lab</b><span data-t="lab_university_d">Lectures, office hours, group work and the details professors announce in class.</span><em data-t="lab_university_o">Open the lab →</em></a>
@@ -180,7 +182,7 @@ const BOOKS = [
    desc:"Como profissionais brasileiros transformam experiência em oportunidade no Canadá. Inclui 100 scripts práticos e um plano de 30/60/90 dias."},
   {id:"the-brazucan-pathway", title:"The Brazucan Pathway", lang:"pt", kb:911, pkb:542,
    desc:"Um GPS psicológico para construir a sua vida no Canadá: do choque de status ao luto à distância, à reconstrução profissional e ao pertencimento."},
-  {id:"comece-com-tudo", title:"Comece com Tudo", lang:"pt", kb:864, pkb:576,
+  {id:"comece-com-tudo", title:"Comece com Tudo", lang:"pt", bi:true, kb:864, pkb:576,
    desc:"Guia bilíngue de preparação para a universidade no Canadá: explicações em português, modelos em inglês."},
   {id:"52-hours-to-a-winning-interview", title:"52 Hours to a Winning Interview", lang:"en", kb:1109, pkb:562,
    desc:"Fifty-two cases, strong answers taken apart, and the words, sounds and documents that decide an interview. For Brazilians building careers in Canada."},
@@ -223,7 +225,7 @@ const T = {
   pt: {
     title: "Biblioteca gratuita · Executive Class",
     tagline: "Invista no seu sucesso",
-    langName: {en:"Inglês", pt:"Português"},
+    langName: {en:"Inglês", pt:"Português", bi:"Bilíngue"}, h1x: " · Biblioteca gratuita",
     fmt: "PDF abre em qualquer celular ou computador. EPUB se ajusta à tela do celular ou do e-reader (não abre no Adobe Acrobat).",
     download: "Baixar", link: "Link", copyTitle: "Copiar o link deste livro",
     copyAria: t => "Copiar o link de " + t, cover: t => "Capa de " + t,
@@ -231,7 +233,7 @@ const T = {
     labsIntro: "Gratuitos, como os livros. Uma história curta de cada vez: ouça, transcreva e descubra o que você deixou passar e por quê.",
     labsSteps: 'Quer trabalhar comigo? <a href="https://executiveclass.ca/#aplicar">Agende o seu Preboarding Assessment →</a>',
     lab_listening_n: "100 histórias", lab_listening_d: "O dia a dia no Canadá: o banco, o médico, a escola, o trabalho e os vizinhos.", lab_listening_o: "Abrir o lab →",
-    lab_interview_n: "76 histórias", lab_interview_d: "Respostas reais de entrevistas de emprego, da primeira à última pergunta.", lab_interview_o: "Abrir o lab →",
+    lab_interview_n: "76 histórias", lab_interview_d: "Respostas-modelo para entrevistas de emprego, da primeira à última pergunta.", lab_interview_o: "Abrir o lab →",
     lab_office_n: "87 histórias", lab_office_d: "O seu primeiro ano no trabalho: reuniões, feedback, telefonemas e o seu gestor.", lab_office_o: "Abrir o lab →",
     lab_networking_n: "95 histórias", lab_networking_d: "Cafés, eventos, recrutadores e telefonemas que abrem portas.", lab_networking_o: "Abrir o lab →",
     lab_university_n: "87 histórias", lab_university_d: "Aulas, horário de atendimento, trabalhos em grupo e os avisos que os professores dão em sala.", lab_university_o: "Abrir o lab →",
@@ -242,7 +244,7 @@ const T = {
   en: {
     title: "Free library · Executive Class",
     tagline: "Invest in your success",
-    langName: {en:"English", pt:"Portuguese"},
+    langName: {en:"English", pt:"Portuguese", bi:"Bilingual"}, h1x: " · Free library",
     fmt: "PDF opens on any phone or computer. EPUB adjusts to your phone or e-reader screen (it will not open in Adobe Acrobat).",
     download: "Download", link: "Link", copyTitle: "Copy a link to this book",
     copyAria: t => "Copy link to " + t, cover: t => "Cover of " + t,
@@ -250,7 +252,7 @@ const T = {
     labsIntro: "Free, like the books. One short story at a time: listen, transcribe and find out what you missed and why.",
     labsSteps: 'Ready to work with me? <a href="https://executiveclass.ca/#aplicar">Book your Preboarding Assessment →</a>',
     lab_listening_n: "100 scripts", lab_listening_d: "Everyday life in Canada: the bank, the doctor, school, work and the neighbours.", lab_listening_o: "Open the lab →",
-    lab_interview_n: "76 scripts", lab_interview_d: "Real job-interview answers, from the first question to the last.", lab_interview_o: "Open the lab →",
+    lab_interview_n: "76 scripts", lab_interview_d: "Model job-interview answers, from the first question to the last.", lab_interview_o: "Open the lab →",
     lab_office_n: "87 scripts", lab_office_d: "Your first year at work: meetings, feedback, phone calls and your manager.", lab_office_o: "Open the lab →",
     lab_networking_n: "95 scripts", lab_networking_d: "Coffee chats, events, recruiters and phone calls that open doors.", lab_networking_o: "Open the lab →",
     lab_university_n: "87 scripts", lab_university_d: "Lectures, office hours, group work and the details professors announce in class.", lab_university_o: "Open the lab →",
@@ -313,7 +315,7 @@ function render(){
   grid.innerHTML = BOOKS.filter(b => !b.featured).map(b => `
   <article class="book" id="${b.id}" data-lang="${b.lang}">
     <a class="cover" href="${b.id}/"><img src="covers/${b.id}.jpg?v=${V}" alt="${esc(t.cover(b.title))}" loading="lazy" width="560" height="840"></a>
-    <span class="lang">${t.langName[b.lang]}</span>
+    <span class="lang">${t.langName[b.bi ? "bi" : b.lang]}</span>
     <h2><a href="${b.id}/">${esc(b.title)}</a></h2>
     <p>${esc(descOf(b, LANG))}</p>
     <div class="actions">

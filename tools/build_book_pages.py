@@ -11,7 +11,7 @@ for m in re.finditer(r"\{(.*?)\}", block, re.S):
     body = m.group(1)
     get = lambda k: re.search(rf'{k}:"((?:[^"\\]|\\.)*)"', body).group(1)
     books.append(dict(id=get("id"), title=get("title"), lang=get("lang"), desc=get("desc"),
-                      kb=int(re.search(r"kb:(\d+)", body).group(1))))
+                      kb=int(re.search(r"kb:(\d+)", body).group(1)), bi="bi:true" in body))
 
 # Keep the sizes shown on the buttons in step with the real files (books/<id>.epub and books/<id>.pdf).
 def _kb(path): return max(1, round(os.path.getsize(path) / 1024))
@@ -29,7 +29,8 @@ src = re.sub(r'const V = "[^"]*";', f'const V = "{V}";', src)
 open("index.html", "w", encoding="utf-8").write(src)
 
 # Every page shows Portuguese by default, with a PT | EN switch (the choice is shared with the library page).
-LABEL = {"pt": {"en": "Livro em inglês", "pt": "Livro em português"}, "en": {"en": "Book in English", "pt": "Book in Portuguese"}}
+LABEL = {"pt": {"en": "Livro em inglês", "pt": "Livro em português", "bi": "Livro bilíngue (português e inglês)"},
+         "en": {"en": "Book in English", "pt": "Book in Portuguese", "bi": "Bilingual book (Portuguese and English)"}}
 TAGLINE = {"pt": "Invista no seu sucesso", "en": "Invest in your success"}
 HELP = {
  "en": ("Need help opening the book?", [
@@ -137,6 +138,7 @@ TPL = """<!doctype html>
 <meta property="og:description" content="{ogdesc}">
 {ogextra}<meta property="og:image" content="{site}/covers/{ogimage}">
 {ogimgextra}<meta property="og:url" content="{site}/{id}/">
+<link rel="canonical" href="{site}/{id}/">
 <link rel="icon" type="image/png" href="../favicon.png">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -234,7 +236,7 @@ for b in books:
     wide = has_wide and not soc.get("wide_preview")          # wide cover on the page itself
     coverfile = f"{b['id']}-wide.jpg" if wide else f"{b['id']}.jpg"
     ogimage = f"{b['id']}-wide.jpg" if has_wide and soc.get("wide_preview") else coverfile
-    ogextra = f'<meta property="og:locale" content="{soc["locale"]}">\n' if soc.get("locale") else ""
+    ogextra = f'<meta property="og:locale" content="{soc.get("locale", "pt_BR")}">\n'
     ogimgextra = ""
     if soc.get("wide_preview"):
         ogimgextra = ('<meta property="og:image:type" content="image/jpeg">\n<meta property="og:image:width" content="1200">\n'
@@ -251,9 +253,9 @@ for b in books:
     stepsof = lambda L: "".join(f'<div class="step"><b>{t}</b><p>{p}</p></div>' for t, p in HELP[L][1])
     page = TPL.format(v=V, site=SITE, id=b["id"], wideclass=" wide" if wide else "",
         coverfile=coverfile, ogimage=ogimage, ogextra=ogextra, ogimgextra=ogimgextra, cta=cta,
-        ogtitle=e(soc.get("title", b["title"])), ogdesc=e(soc.get("desc", b["desc"])),
-        title=e(b["title"]), desc=e(b["desc"]),
-        langlabel=both(LABEL["pt"][b["lang"]], LABEL["en"][b["lang"]]), tagline=both(TAGLINE["pt"], TAGLINE["en"]),
+        ogtitle=e(soc.get("title", b["title"])), ogdesc=e(soc.get("desc", d_pt)),
+        title=e(b["title"]), desc=e(d_pt),
+        langlabel=both(LABEL["pt"]["bi" if b["bi"] else b["lang"]], LABEL["en"]["bi" if b["bi"] else b["lang"]]), tagline=both(TAGLINE["pt"], TAGLINE["en"]),
         descbody=both(e(d_pt), e(d_en)),
         dlpdf=both(DL["pt"][0], DL["en"][0]), dlepub=both(DL["pt"][1], DL["en"][1]), size=size, psize=psize, helptitle=both(HELP["pt"][0], HELP["en"][0]),
         more=both(HELP["pt"][3], HELP["en"][3]),
