@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate one page per book (e.g. wise-up/index.html) from the BOOKS list in index.html.
+"""Generate one page per book (e.g. diplomacy/index.html) from the BOOKS list in index.html.
 Run from the repository root:  python3 tools/build_book_pages.py"""
 import re, html, os, hashlib
 
@@ -76,7 +76,7 @@ OPENING_ALT = {
  "blue-ocean": "As melhores estratégias não lutam contra a concorrência: elas a tornam irrelevante. Aprenda a pensar assim e a discutir essas ideias com confiança em inglês.",
  "breaking-the-english-code": "Você já sabe o que quer dizer. Aprenda a reconstruir as suas ideias em inglês e a apresentá-las com confiança.",
  "first-principles": "Grandes ideias nascem quando alguém questiona o que todos os outros aceitam. Aprenda a pensar diferente e a expressar o seu raciocínio com confiança.",
- "wise-up": "Todo grande fracasso traz uma lição para quem está disposto a aprendê-la. Aprenda com as decisões mais difíceis da história e discuta-as com confiança.",
+ "diplomacy": "Um argumento certo dito de forma brusca pode custar um relacionamento. Aprenda as palavras que tornam as coisas difíceis fáceis de ouvir e use-as com confiança.",
  "natures-business-model": "A natureza resolve problemas difíceis há milhões de anos. Aprenda os princípios dela e leve-os para o seu trabalho com confiança.",
  "the-intimacies-of-ritual": "Toda cultura responde às mesmas perguntas humanas do seu próprio jeito. Aprenda a ver o mundo por meio de outros costumes e a falar sobre eles com confiança.",
  "crisis-management": "Toda crise é também um ponto de virada. Aprenda como pessoas e organizações transformaram colapso em avanço, e discuta isso com confiança.",
@@ -107,7 +107,7 @@ OPENING = {
  "blue-ocean": "The best strategies don't fight the competition—they make it irrelevant. Learn to think this way, and to discuss these ideas with confidence in English.",
  "breaking-the-english-code": "You already know what you want to say. Learn to rebuild your ideas in English—and present them with confidence.",
  "first-principles": "Great ideas begin when someone questions what everyone else accepts. Learn to think differently—and express your thinking with confidence.",
- "wise-up": "Every great failure carries a lesson for those willing to learn it. Learn from history's hardest decisions, and discuss them with confidence.",
+ "diplomacy": "A correct point made bluntly can cost you a relationship. Learn the words that make hard things easy to hear—and use them with confidence.",
  "natures-business-model": "Nature has been solving hard problems for millions of years. Learn its principles, and bring them into your work with confidence.",
  "the-intimacies-of-ritual": "Every culture answers the same human questions in its own way. Learn to see the world through other customs, and talk about them with confidence.",
  "crisis-management": "Every crisis is also a turning point. Learn how people and organizations turned breakdown into breakthrough—and discuss it with confidence.",

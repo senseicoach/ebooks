@@ -351,8 +351,8 @@ footer{color:var(--muted);font-size:13px;padding:0 0 40px}
   },
   {
    "@type": "Book",
-   "name": "Wise Up",
-   "url": "https://executiveclass.ca/ebooks/wise-up/",
+   "name": "Diplomacy: Phrases That Exude Professionalism",
+   "url": "https://executiveclass.ca/ebooks/diplomacy/",
    "author": {
     "@type": "Person",
     "name": "Ron Taylor"
@@ -521,7 +521,7 @@ footer{color:var(--muted);font-size:13px;padding:0 0 40px}
 <script>
 // To add a book: put the .epub in /books and the cover in /covers (same name), then add a line here.
 // Changes whenever a cover changes, so browsers fetch the new image instead of an old saved copy.
-const V = "d067668e";
+const V = "60392e7b";
 const BOOKS = [
   {id:"the-psychology-of-going-beyond", title:"The Psychology of Going Beyond", lang:"en", kb:495, pkb:527,
    desc:"52 case studies in understanding yourself: how beliefs, fear, habits, judgement and other people shape what you attempt. Each case comes with an academic analysis, key terms and reflection questions for advanced English learners."},
@@ -549,8 +549,8 @@ const BOOKS = [
    desc:"One hundred exercises for Brazilian professionals: think it through in Portuguese, then rebuild it in clear, confident professional English."},
   {id:"first-principles", title:"First Principles", lang:"en", kb:1045, pkb:1043,
    desc:"52 stories about thinking differently: a reading and critical-thinking course for advanced ESL and Business English learners."},
-  {id:"wise-up", title:"Wise Up", lang:"en", kb:1265, pkb:1300,
-   desc:"Decisions that made history: fifty-two case studies in disaster, decision-making, organizational collapse and recovery."},
+  {id:"diplomacy", title:"Diplomacy: Phrases That Exude Professionalism", lang:"en", kb:436, pkb:396,
+   desc:"300 diplomatic phrases for the hardest moments at work, from disagreeing with a colleague to delivering bad news, each with the blunt version it replaces and an example of it in use."},
   {id:"natures-business-model", title:"Nature's Business Model", lang:"en", kb:1121, pkb:1060,
    desc:"52 principles from nature for building better organizations: short case studies tracing mechanisms in the natural world into working principles."},
   {id:"the-intimacies-of-ritual", title:"The Intimacies of Ritual", lang:"en", kb:945, pkb:795,
@@ -623,7 +623,7 @@ const DESC = {
     "blue-ocean": "Do Cirque du Soleil e da Southwest Airlines ao Nubank e às Havaianas, cada caso analisado com a matriz Eliminar-Reduzir-Elevar-Criar, vocabulário, exercícios práticos e gabarito.",
     "breaking-the-english-code": "Cem exercícios para profissionais brasileiros: pense primeiro em português e depois reconstrua a ideia em um inglês profissional claro e confiante.",
     "first-principles": "52 histórias sobre pensar diferente: um curso de leitura e pensamento crítico para alunos avançados de inglês e de inglês para negócios.",
-    "wise-up": "Decisões que fizeram história: cinquenta e dois estudos de caso sobre desastres, tomada de decisão, colapso organizacional e recuperação.",
+    "diplomacy": "300 frases diplomáticas para os momentos mais difíceis no trabalho, de discordar de um colega a dar más notícias, cada uma com a versão direta demais que ela substitui e um exemplo de uso.",
     "natures-business-model": "52 princípios da natureza para construir organizações melhores: estudos de caso curtos que transformam mecanismos do mundo natural em princípios de trabalho.",
     "the-intimacies-of-ritual": "52 costumes do mundo inteiro, organizados não por geografia, mas pelas perguntas humanas que eles respondem.",
     "crisis-management": "Viradas corporativas, recuperação após crises de imagem e de cibersegurança, reinvenção de marcas e reinvenção pessoal: cinquenta e dois estudos de caso organizados em seis partes.",
@@ -691,7 +691,7 @@ document.querySelector('main').addEventListener('click', async e => {
   catch { prompt(T[LANG].copyPrompt, url); }
 });
 
-// Old-style links (…/ebooks/#wise-up) go straight to that book's own page.
+// Old-style links (…/ebooks/#diplomacy) go straight to that book's own page.
 function toBookPage(){
   const id = decodeURIComponent(location.hash.slice(1));
   if(id && BOOKS.some(b => b.id === id)) location.replace(location.pathname.replace(/index\.html$/,'') + id + '/');
